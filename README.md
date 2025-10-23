@@ -7,6 +7,6 @@ The CALM Scheduling Green Agent is an innovative Agentic AI evaluation framework
 * **dynamic re-planning disruption minimization** (Under changes, is the new schedule feasible, minimally disruptive or small edit distance from the original schedule, and stable across repeated trials?)
 * (optional) **real-world feasibility** (Are scheduled activities possible given real-world constraints, ex. transportation time cost, opening hours, etc.)
 
-CALM operates by feeding diverse synthetic personas and natural language scheduling requests into white scheduling agents, and scoring their outputs. We aim to enable comprehensive comparison and improvement of AI scheduling agents for work-life balance and practical usability.
+CALM operates by feeding diverse synthetic personas and natural language scheduling requests into white scheduling agents, then score their outputs. We aim to enable comprehensive comparison and improvement of AI scheduling agents for work-life balance and practical usability.
 
 The official agentbeats platform can be found here: https://github.com/agentbeats/agentbeats. For benchmark implementation onboarding, please check out docs/system_overview.md, then take a good look at some implemented agent examples located in the scenarios folder.
