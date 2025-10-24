@@ -9,4 +9,4 @@ The CALM Scheduling Green Agent is an innovative Agentic AI evaluation framework
 
 CALM operates by feeding diverse synthetic personas and natural language scheduling requests into white scheduling agents, then score their outputs. We aim to enable comprehensive comparison and improvement of AI scheduling agents for work-life balance and practical usability.
 
-The official agentbeats platform can be found here: https://github.com/agentbeats/agentbeats. For benchmark implementation onboarding, please check out docs/system_overview.md, then take a good look at some implemented agent examples located in the scenarios folder.
+The official agentbeats platform can be found here: https://github.com/agentbeats/agentbeats. For benchmark implementation onboarding, please take a good look at some implemented agent examples located in the scenarios folder.
