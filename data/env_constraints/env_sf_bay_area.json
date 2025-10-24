@@ -1,0 +1,139 @@
+{
+  "env_id": "ENV_SF_BAY_AREA_001",
+  "location": "San Francisco Bay Area",
+  "description": "San Francisco and East Bay facilities for working professionals",
+  "facilities": [
+    {
+      "facility_id": "TOUCHSTONE_CLIMBING",
+      "name": "Touchstone Climbing & Fitness",
+      "type": "climbing_gym",
+      "address": "2295 Harrison St, San Francisco, CA",
+      "hours": {
+        "Monday": {"open": "06:00", "close": "23:00"},
+        "Tuesday": {"open": "06:00", "close": "23:00"},
+        "Wednesday": {"open": "06:00", "close": "23:00"},
+        "Thursday": {"open": "06:00", "close": "23:00"},
+        "Friday": {"open": "06:00", "close": "23:00"},
+        "Saturday": {"open": "08:00", "close": "20:00"},
+        "Sunday": {"open": "08:00", "close": "20:00"}
+      },
+      "peak_hours": ["17:00-20:00"],
+      "avg_visit_duration": 2
+    },
+    {
+      "facility_id": "EQUINOX_SF",
+      "name": "Equinox Fitness Club",
+      "type": "gym",
+      "address": "Various SF locations",
+      "hours": {
+        "Monday": {"open": "05:00", "close": "22:00"},
+        "Tuesday": {"open": "05:00", "close": "22:00"},
+        "Wednesday": {"open": "05:00", "close": "22:00"},
+        "Thursday": {"open": "05:00", "close": "22:00"},
+        "Friday": {"open": "05:00", "close": "22:00"},
+        "Saturday": {"open": "07:00", "close": "20:00"},
+        "Sunday": {"open": "07:00", "close": "20:00"}
+      },
+      "peak_hours": ["06:00-08:00", "17:00-20:00"],
+      "avg_visit_duration": 1.5
+    },
+    {
+      "facility_id": "WHOLE_FOODS_SF",
+      "name": "Whole Foods Market",
+      "type": "grocery",
+      "address": "1765 California St, San Francisco, CA",
+      "hours": {
+        "Monday": {"open": "08:00", "close": "22:00"},
+        "Tuesday": {"open": "08:00", "close": "22:00"},
+        "Wednesday": {"open": "08:00", "close": "22:00"},
+        "Thursday": {"open": "08:00", "close": "22:00"},
+        "Friday": {"open": "08:00", "close": "22:00"},
+        "Saturday": {"open": "08:00", "close": "22:00"},
+        "Sunday": {"open": "08:00", "close": "22:00"}
+      },
+      "avg_visit_duration": 0.75
+    },
+    {
+      "facility_id": "PHILZ_COFFEE",
+      "name": "Philz Coffee",
+      "type": "cafe",
+      "address": "Multiple locations",
+      "hours": {
+        "Monday": {"open": "06:00", "close": "20:00"},
+        "Tuesday": {"open": "06:00", "close": "20:00"},
+        "Wednesday": {"open": "06:00", "close": "20:00"},
+        "Thursday": {"open": "06:00", "close": "20:00"},
+        "Friday": {"open": "06:00", "close": "20:00"},
+        "Saturday": {"open": "06:30", "close": "20:00"},
+        "Sunday": {"open": "06:30", "close": "20:00"}
+      },
+      "seating_for_work": true,
+      "wifi": true
+    },
+    {
+      "facility_id": "PETCO_SF",
+      "name": "Petco",
+      "type": "pet_store",
+      "address": "2180 Bryant St, San Francisco, CA",
+      "hours": {
+        "Monday": {"open": "09:00", "close": "21:00"},
+        "Tuesday": {"open": "09:00", "close": "21:00"},
+        "Wednesday": {"open": "09:00", "close": "21:00"},
+        "Thursday": {"open": "09:00", "close": "21:00"},
+        "Friday": {"open": "09:00", "close": "21:00"},
+        "Saturday": {"open": "09:00", "close": "21:00"},
+        "Sunday": {"open": "10:00", "close": "19:00"}
+      },
+      "avg_visit_duration": 0.5
+    },
+    {
+      "facility_id": "SF_VET_CLINIC",
+      "name": "San Francisco Veterinary Specialists",
+      "type": "veterinary",
+      "address": "600 Alabama St, San Francisco, CA",
+      "hours": {
+        "Monday": {"open": "08:00", "close": "18:00"},
+        "Tuesday": {"open": "08:00", "close": "18:00"},
+        "Wednesday": {"open": "08:00", "close": "18:00"},
+        "Thursday": {"open": "08:00", "close": "18:00"},
+        "Friday": {"open": "08:00", "close": "18:00"},
+        "Saturday": {"open": "09:00", "close": "17:00"},
+        "Sunday": {"closed": true}
+      },
+      "avg_visit_duration": 1,
+      "notes": "Appointments required, 24hr emergency"
+    },
+    {
+      "facility_id": "RESTAURANT_TYPICAL",
+      "name": "Typical SF Restaurant",
+      "type": "restaurant",
+      "address": "Various",
+      "hours": {
+        "Monday": {"open": "11:00", "close": "22:00"},
+        "Tuesday": {"open": "11:00", "close": "22:00"},
+        "Wednesday": {"open": "11:00", "close": "22:00"},
+        "Thursday": {"open": "11:00", "close": "22:00"},
+        "Friday": {"open": "11:00", "close": "23:00"},
+        "Saturday": {"open": "10:00", "close": "23:00"},
+        "Sunday": {"open": "10:00", "close": "22:00"}
+      },
+      "avg_visit_duration": 1.25,
+      "notes": "Lunch 11:00-14:00, Dinner 17:00-22:00"
+    }
+  ],
+  "transportation": {
+    "walking_speed_mph": 3,
+    "biking_speed_mph": 10,
+    "driving_speed_mph": 25,
+    "public_transit_avg_speed_mph": 15,
+    "avg_parking_time_minutes": 10,
+    "peak_traffic_hours": ["07:00-10:00", "16:00-19:00"],
+    "peak_traffic_slowdown": 0.5
+  },
+  "weather_considerations": {
+    "typical_sf_fog": "mornings and evenings",
+    "outdoor_activity_note": "Layer clothing, can be 10-15°F cooler than forecast"
+  }
+}
+
+

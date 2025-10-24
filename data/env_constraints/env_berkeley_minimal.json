@@ -1,0 +1,84 @@
+{
+  "env_id": "ENV_BERKELEY_001",
+  "location": "Berkeley, CA",
+  "description": "UC Berkeley campus area with common student facilities",
+  "facilities": [
+    {
+      "facility_id": "RSF",
+      "name": "Recreational Sports Facility",
+      "type": "gym",
+      "address": "2301 Bancroft Way, Berkeley, CA",
+      "hours": {
+        "Monday": {"open": "06:00", "close": "23:00"},
+        "Tuesday": {"open": "06:00", "close": "23:00"},
+        "Wednesday": {"open": "06:00", "close": "23:00"},
+        "Thursday": {"open": "06:00", "close": "23:00"},
+        "Friday": {"open": "06:00", "close": "22:00"},
+        "Saturday": {"open": "08:00", "close": "20:00"},
+        "Sunday": {"open": "08:00", "close": "22:00"}
+      },
+      "peak_hours": ["17:00-20:00"],
+      "avg_visit_duration": 1.5
+    },
+    {
+      "facility_id": "MAIN_STACKS",
+      "name": "Doe Memorial Library - Main Stacks",
+      "type": "library",
+      "address": "Doe Library, UC Berkeley",
+      "hours": {
+        "Monday": {"open": "08:00", "close": "22:00"},
+        "Tuesday": {"open": "08:00", "close": "22:00"},
+        "Wednesday": {"open": "08:00", "close": "22:00"},
+        "Thursday": {"open": "08:00", "close": "22:00"},
+        "Friday": {"open": "08:00", "close": "18:00"},
+        "Saturday": {"open": "10:00", "close": "18:00"},
+        "Sunday": {"open": "12:00", "close": "22:00"}
+      },
+      "quiet_study_available": true
+    },
+    {
+      "facility_id": "TRADER_JOES_BERKELEY",
+      "name": "Trader Joe's",
+      "type": "grocery",
+      "address": "1885 University Ave, Berkeley, CA",
+      "hours": {
+        "Monday": {"open": "08:00", "close": "21:00"},
+        "Tuesday": {"open": "08:00", "close": "21:00"},
+        "Wednesday": {"open": "08:00", "close": "21:00"},
+        "Thursday": {"open": "08:00", "close": "21:00"},
+        "Friday": {"open": "08:00", "close": "21:00"},
+        "Saturday": {"open": "08:00", "close": "21:00"},
+        "Sunday": {"open": "08:00", "close": "21:00"}
+      },
+      "avg_visit_duration": 0.75
+    },
+    {
+      "facility_id": "BLUE_BOTTLE_TELEGRAPH",
+      "name": "Blue Bottle Coffee",
+      "type": "cafe",
+      "address": "2414 Telegraph Ave, Berkeley, CA",
+      "hours": {
+        "Monday": {"open": "07:00", "close": "18:00"},
+        "Tuesday": {"open": "07:00", "close": "18:00"},
+        "Wednesday": {"open": "07:00", "close": "18:00"},
+        "Thursday": {"open": "07:00", "close": "18:00"},
+        "Friday": {"open": "07:00", "close": "18:00"},
+        "Saturday": {"open": "07:00", "close": "18:00"},
+        "Sunday": {"open": "07:00", "close": "18:00"}
+      },
+      "seating_for_work": true
+    }
+  ],
+  "transportation": {
+    "walking_speed_mph": 3,
+    "biking_speed_mph": 10,
+    "campus_locations": {
+      "Soda_Hall": {"lat": 37.8757, "lon": -122.2585},
+      "Cory_Hall": {"lat": 37.8754, "lon": -122.2573},
+      "RSF": {"lat": 37.8686, "lon": -122.2625}
+    }
+  }
+}
+
+
+

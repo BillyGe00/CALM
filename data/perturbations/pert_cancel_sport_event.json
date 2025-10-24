@@ -1,0 +1,53 @@
+{
+  "perturbation_id": "PERT_FACILITY_CLOSURE_001",
+  "type": "facility_closure",
+  "severity": "low",
+  "description": "Gym unexpectedly closed for maintenance, forcing workout reschedule",
+  "trigger_time": "morning_of",
+  "perturbation_event": {
+    "facility_id": "RSF",
+    "closure_reason": "Emergency maintenance - water leak",
+    "closure_date": "2024-10-22",
+    "closure_hours": "06:00-18:00",
+    "notice_given": "2 hours",
+    "alternative_suggested": "Use outdoor running trails or home workout"
+  },
+  "affected_activities": [
+    {
+      "activity_type": "gym_workout",
+      "scheduled_time": "07:00-08:00",
+      "impact": "cannot_proceed_as_planned"
+    }
+  ],
+  "evaluation_criteria": {
+    "replanning_quality": {
+      "feasibility": "Must find alternative workout or reschedule",
+      "external_feasibility": "Check if alternative location/time is valid",
+      "minimal_disruption": "Avoid cascading changes to other events",
+      "persona_alignment": "Solution should respect persona's fitness commitment"
+    }
+  },
+  "valid_adaptations": [
+    {
+      "adaptation_type": "location_change",
+      "description": "Switch to outdoor run or home workout at same time",
+      "feasibility": "high",
+      "persona_fit": "Acceptable for morning person"
+    },
+    {
+      "adaptation_type": "time_shift",
+      "description": "Reschedule workout to evening (after 18:00)",
+      "feasibility": "medium",
+      "persona_fit": "Low for morning person persona"
+    },
+    {
+      "adaptation_type": "skip",
+      "description": "Skip workout for the day",
+      "feasibility": "high",
+      "persona_fit": "Low - violates fitness commitment"
+    }
+  ]
+}
+
+
+

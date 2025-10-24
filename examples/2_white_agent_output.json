@@ -1,0 +1,132 @@
+{
+  "white_agent_id": "test_white_agent_v1",
+  "schedule_version": "1.0",
+  "generated_at": "2024-10-22T14:35:00Z",
+  "events": [
+    {
+      "event_id": "E1",
+      "title": "CS 285: Deep RL Lecture",
+      "day": "Monday",
+      "start_time": "10:00",
+      "end_time": "11:30",
+      "type": "academic_mandatory",
+      "location": "Soda Hall 306"
+    },
+    {
+      "event_id": "E2",
+      "title": "CS 285 Project Work",
+      "day": "Monday",
+      "start_time": "10:30",
+      "end_time": "12:30",
+      "type": "work_project",
+      "location": "Moffitt Library",
+      "note": "ISSUE: Overlaps with mandatory lecture!"
+    },
+    {
+      "event_id": "E3",
+      "title": "Morning Workout",
+      "day": "Monday",
+      "start_time": "07:00",
+      "end_time": "08:00",
+      "type": "personal_exercise",
+      "location": "RSF Gym"
+    },
+    {
+      "event_id": "E4",
+      "title": "Deep Work - Project",
+      "day": "Monday",
+      "start_time": "20:00",
+      "end_time": "23:00",
+      "type": "work_project",
+      "location": "Home",
+      "note": "ISSUE: 8pm-11pm work for morning person!"
+    },
+    {
+      "event_id": "E5",
+      "title": "Research Group Meeting",
+      "day": "Tuesday",
+      "start_time": "15:00",
+      "end_time": "16:30",
+      "type": "work_mandatory",
+      "location": "Soda Hall 430"
+    },
+    {
+      "event_id": "E6",
+      "title": "Project Work",
+      "day": "Tuesday",
+      "start_time": "08:00",
+      "end_time": "10:00",
+      "type": "work_project",
+      "location": "Home"
+    },
+    {
+      "event_id": "E7",
+      "title": "Workout",
+      "day": "Tuesday",
+      "start_time": "22:30",
+      "end_time": "23:30",
+      "type": "personal_exercise",
+      "location": "RSF Gym",
+      "note": "ISSUE: RSF closes at 11pm!"
+    },
+    {
+      "event_id": "E8",
+      "title": "CS 285: Deep RL Lecture",
+      "day": "Wednesday",
+      "start_time": "10:00",
+      "end_time": "11:30",
+      "type": "academic_mandatory",
+      "location": "Soda Hall 306"
+    },
+    {
+      "event_id": "E9",
+      "title": "Project Work",
+      "day": "Wednesday",
+      "start_time": "07:00",
+      "end_time": "09:00",
+      "type": "work_project",
+      "location": "Home"
+    },
+    {
+      "event_id": "E10",
+      "title": "Workout",
+      "day": "Wednesday",
+      "start_time": "18:00",
+      "end_time": "19:00",
+      "type": "personal_exercise",
+      "location": "RSF Gym"
+    },
+    {
+      "event_id": "E11",
+      "title": "Sleep",
+      "day": "Monday",
+      "start_time": "23:30",
+      "end_time": "07:00",
+      "type": "rest_sleep",
+      "location": "Home",
+      "note": "Only 7.5 hours - but late work session violates this"
+    },
+    {
+      "event_id": "E12",
+      "title": "Sleep",
+      "day": "Tuesday",
+      "start_time": "00:00",
+      "end_time": "07:30",
+      "type": "rest_sleep",
+      "location": "Home",
+      "note": "ISSUE: Only 7.5 hours, but late gym violates this"
+    }
+  ],
+  "summary": {
+    "total_events": 12,
+    "project_work_hours": 15,
+    "workout_sessions": 4,
+    "sleep_hours_per_night": 7.5,
+    "potential_issues": [
+      "Time conflict on Monday: Lecture and Project Work overlap",
+      "Late night work not aligned with morning chronotype",
+      "Gym scheduled after closing time on Tuesday"
+    ]
+  }
+}
+

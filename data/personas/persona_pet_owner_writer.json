@@ -1,0 +1,57 @@
+{
+  "persona_id": "PET_OWNER_WRITER_004",
+  "name": "Jordan Martinez",
+  "role": "Freelance Writer & Content Creator",
+  "work_arrangement": "fully_remote",
+  "pets": ["Dog (needs 3x daily walks)", "Cat"],
+  "preferences": {
+    "chronotype": "moderate_flexible",
+    "peak_hours": ["10:00", "14:00"],
+    "sleep_requirement": 7,
+    "preferred_sleep_window": ["23:30", "07:00"],
+    "work_life_balance": {
+      "writing_hours_per_day": 6,
+      "deep_work_min_hours_per_day": 3,
+      "pet_care_hours_per_day": 2,
+      "exercise_min_hours_per_week": 5,
+      "social_min_hours_per_week": 4
+    },
+    "productivity_style": "flexible_blocks",
+    "break_preference": "frequent_with_pet_interaction"
+  },
+  "constraints": {
+    "hard": [
+      "Dog walk at 07:30 (30 min)",
+      "Dog walk at 12:30 (20 min)",
+      "Dog walk at 18:00 (30 min)",
+      "Client calls must be scheduled around dog walks",
+      "Minimum 3 hours continuous writing time daily",
+      "At least one 2-hour outdoor activity with dog per week"
+    ],
+    "soft": [
+      "Prefer deep writing 10:00-13:00",
+      "Avoid client calls before 09:00",
+      "Prefer vet/pet store visits on weekdays before 11:00 (less crowded)",
+      "Like to combine dog walks with errands when possible"
+    ]
+  },
+  "lifestyle": {
+    "commute_method": "work_from_home",
+    "avg_commute_time": 0,
+    "meal_preferences": "flexible_timing",
+    "fitness_activities": ["dog_walking", "hiking", "yoga"],
+    "social_activities": ["dog_park_meetups", "writers_group_monthly", "friends_over_dinner"],
+    "hobbies": ["reading", "photography", "gardening"]
+  },
+  "values": [
+    "pet_wellbeing",
+    "creative_freedom",
+    "work_flexibility",
+    "outdoor_time",
+    "authentic_relationships"
+  ],
+  "income_structure": "per_project_plus_retainer",
+  "typical_deadlines": "2-3 articles per week, 1 long-form piece bi-weekly"
+}
+
+

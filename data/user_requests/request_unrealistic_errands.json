@@ -1,0 +1,91 @@
+{
+  "request_id": "REQ_UNREALISTIC_ERRANDS_001",
+  "persona_id": "WORKING_PARENT_002",
+  "baseline_id": "WORKING_PARENT_BASELINE_001",
+  "request_type": "external_feasibility_test",
+  "natural_language_prompt": "I need to squeeze in some errands this week. Can you fit in: grocery shopping at Trader Joe's, picking up dry cleaning, and maybe a quick dinner at a restaurant between my 1:1s on Thursday and school pickup? Also need to hit the gym at some point in the evening.",
+  "structured_requirements": {
+    "tasks_to_add": [
+      {
+        "task_id": "GROCERY_SHOPPING",
+        "title": "Grocery Shopping at Trader Joe's",
+        "duration_hours": 0.75,
+        "can_split": false,
+        "priority": "medium",
+        "location": "Trader Joe's Berkeley",
+        "requires_facility_hours_check": true
+      },
+      {
+        "task_id": "DRY_CLEANING",
+        "title": "Pick up dry cleaning",
+        "duration_hours": 0.25,
+        "can_split": false,
+        "priority": "low",
+        "location": "Downtown cleaners",
+        "requires_facility_hours_check": true,
+        "typical_hours": "09:00-18:00"
+      },
+      {
+        "task_id": "RESTAURANT_DINNER",
+        "title": "Quick dinner out",
+        "duration_hours": 1,
+        "can_split": false,
+        "priority": "low",
+        "preferred_time": "between 1:1s and school pickup on Thursday",
+        "requires_facility_hours_check": true,
+        "notes": "Testing if agent realizes there's only 15min gap between events"
+      },
+      {
+        "task_id": "GYM_EVENING",
+        "title": "Evening Gym Session",
+        "duration_hours": 1,
+        "can_split": false,
+        "priority": "medium",
+        "preferred_time": "evening",
+        "location": "Local gym",
+        "requires_facility_hours_check": true
+      }
+    ],
+    "constraints_to_respect": [
+      "School pickup at 15:30 is immovable",
+      "Family dinner 18:00-19:00 is sacred",
+      "Kids bedtime routine 19:30-20:30 requires presence",
+      "Thursday 1:1s are 13:00-15:00"
+    ],
+    "feasibility_traps": [
+      {
+        "trap_type": "insufficient_time_window",
+        "description": "Restaurant between 1:1s (ends 15:00) and pickup (starts 15:15) = only 15 minutes",
+        "expected_agent_behavior": "Should recognize impossibility and suggest alternative"
+      },
+      {
+        "trap_type": "facility_closing_hours",
+        "description": "Evening gym after kids bedtime means starting at 20:30, but many gyms close at 21:00-22:00",
+        "expected_agent_behavior": "Should check gym hours or note time constraint"
+      },
+      {
+        "trap_type": "travel_time_ignored",
+        "description": "Multiple errands require driving between locations",
+        "expected_agent_behavior": "Should account for 10-15 min travel between each location"
+      }
+    ]
+  },
+  "evaluation_focus": [
+    "external_feasibility",
+    "constraint_satisfaction",
+    "realistic_time_buffers"
+  ],
+  "expected_challenges": [
+    "Impossible time windows",
+    "Facility hours conflicts",
+    "Travel time calculation",
+    "Conflicting priorities (work vs family vs errands)"
+  ],
+  "ground_truth_issues": [
+    "Restaurant request is infeasible (15-min window)",
+    "Evening gym may conflict with facility hours",
+    "Dry cleaning pickup may be hard to fit during work hours"
+  ]
+}
+
+

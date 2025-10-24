@@ -1,0 +1,77 @@
+{
+  "perturbation_id": "PERT_TRAVEL_DELAY_001",
+  "type": "transportation_disruption",
+  "severity": "high",
+  "description": "Conference return flight delayed, causing missed commitments next day",
+  "trigger_time": "evening_before",
+  "perturbation_event": {
+    "original_flight": {
+      "flight_number": "UA1234",
+      "scheduled_arrival": "2024-10-24T22:00:00",
+      "arrival_airport": "SFO"
+    },
+    "delay_info": {
+      "new_arrival": "2024-10-25T03:00:00",
+      "delay_hours": 5,
+      "reason": "Weather delay at departure airport",
+      "notice_given": "4 hours before original departure"
+    },
+    "cascading_impacts": {
+      "travel_home": "45 min drive from SFO",
+      "earliest_available": "2024-10-25T04:00:00",
+      "sleep_reduction": "Significant"
+    }
+  },
+  "affected_schedule": {
+    "date": "2024-10-25",
+    "morning_commitments": [
+      {
+        "event": "Team Standup",
+        "time": "09:00-09:15",
+        "type": "work_important",
+        "can_join_remotely": true
+      },
+      {
+        "event": "Client Presentation",
+        "time": "10:00-11:30",
+        "type": "work_mandatory",
+        "can_join_remotely": false,
+        "preparation_needed": true
+      }
+    ]
+  },
+  "evaluation_criteria": {
+    "replanning_quality": {
+      "feasibility": "Must account for reduced sleep and late arrival",
+      "constraint_satisfaction": "Check if mandatory events can still be met",
+      "health_consideration": "Should consider safety with minimal sleep",
+      "minimal_disruption": "Intelligent rescheduling of non-critical events"
+    }
+  },
+  "valid_adaptations": [
+    {
+      "adaptation_type": "partial_attendance",
+      "description": "Join standup remotely from home, go to office for client meeting",
+      "trade_offs": "Less preparation time, but attendance maintained"
+    },
+    {
+      "adaptation_type": "delegate",
+      "description": "Have colleague cover client presentation",
+      "trade_offs": "Meets health/safety needs, but misses important meeting"
+    },
+    {
+      "adaptation_type": "reschedule_request",
+      "description": "Request to move client meeting to afternoon",
+      "trade_offs": "Best case, but depends on client flexibility"
+    }
+  ],
+  "expected_challenges": [
+    "Sleep deprivation impact on next day",
+    "Limited time for shower/preparation",
+    "Reduced cognitive performance",
+    "Professional commitment vs personal health trade-off"
+  ]
+}
+
+
+

@@ -1,0 +1,97 @@
+{
+  "baseline_id": "WORKING_PARENT_BASELINE_001",
+  "persona_id": "WORKING_PARENT_002",
+  "week_start": "2024-10-21",
+  "recurring_events": [
+    {
+      "event_id": "SCHOOL_DROPOFF",
+      "title": "School Drop-off",
+      "type": "family_mandatory",
+      "day_of_week": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "start_time": "07:45",
+      "end_time": "08:15",
+      "location": "Hillside Elementary",
+      "travel_time_after": 15,
+      "recurrence": "weekly"
+    },
+    {
+      "event_id": "SCHOOL_PICKUP",
+      "title": "School Pick-up",
+      "type": "family_mandatory",
+      "day_of_week": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "start_time": "15:15",
+      "end_time": "15:45",
+      "location": "Hillside Elementary",
+      "travel_time_before": 15,
+      "travel_time_after": 15,
+      "recurrence": "weekly"
+    },
+    {
+      "event_id": "TEAM_MEETING",
+      "title": "Engineering Team Sync",
+      "type": "work_mandatory",
+      "day_of_week": ["Tuesday"],
+      "start_time": "10:00",
+      "end_time": "11:00",
+      "location": "Office Conference Room A",
+      "recurrence": "weekly"
+    },
+    {
+      "event_id": "ONE_ON_ONES",
+      "title": "1:1s with Direct Reports",
+      "type": "work_mandatory",
+      "day_of_week": ["Thursday"],
+      "start_time": "13:00",
+      "end_time": "15:00",
+      "location": "Office (varies)",
+      "notes": "4 x 30min meetings",
+      "recurrence": "weekly"
+    },
+    {
+      "event_id": "FAMILY_DINNER",
+      "title": "Family Dinner",
+      "type": "family_important",
+      "day_of_week": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "start_time": "18:00",
+      "end_time": "19:00",
+      "location": "Home",
+      "recurrence": "weekly"
+    },
+    {
+      "event_id": "KIDS_BEDTIME",
+      "title": "Kids Bedtime Routine",
+      "type": "family_mandatory",
+      "day_of_week": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "start_time": "19:30",
+      "end_time": "20:30",
+      "location": "Home",
+      "recurrence": "weekly"
+    }
+  ],
+  "one_time_events": [
+    {
+      "event_id": "PRODUCT_REVIEW",
+      "title": "Q4 Product Review Presentation",
+      "type": "work_important",
+      "date": "2024-10-24",
+      "start_time": "14:00",
+      "end_time": "15:30",
+      "location": "Office Main Conference Room",
+      "preparation_time_needed": 3
+    }
+  ],
+  "baseline_routine": {
+    "sleep": {
+      "typical_bedtime": "23:00",
+      "typical_wake_time": "06:30"
+    },
+    "work_hours": {
+      "start": "08:30",
+      "end": "17:00",
+      "flexibility": "high"
+    }
+  }
+}
+
+
+

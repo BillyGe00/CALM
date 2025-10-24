@@ -1,0 +1,223 @@
+{
+  "evaluation_id": "EVAL_20241022_143600",
+  "timestamp": "2024-10-22T14:36:00Z",
+  "white_agent_id": "test_white_agent_v1",
+  "evaluation_context": {
+    "persona_id": "UCB_MORNING_STUDENT_001",
+    "baseline_id": "UCB_STUDENT_BASELINE_001",
+    "request_id": "REQ_STUDY_BALANCE_001",
+    "env_id": "ENV_BERKELEY_001"
+  },
+  "overall_score": 58.25,
+  "dimension_scores": {
+    "constraint_satisfaction": {
+      "score": 55.0,
+      "weight": 0.25,
+      "weighted_contribution": 13.75,
+      "checks_performed": {
+        "time_conflicts": "FAILED",
+        "mandatory_events_included": "PASSED",
+        "sleep_minimum_met": "PASSED",
+        "buffer_time_respected": "PASSED"
+      }
+    },
+    "persona_alignment": {
+      "score": 45.0,
+      "weight": 0.20,
+      "weighted_contribution": 9.0,
+      "checks_performed": {
+        "chronotype_match": "FAILED",
+        "work_life_balance_ratios": "PASSED",
+        "preference_violations": "MULTIPLE"
+      }
+    },
+    "balance_index": {
+      "score": 85.0,
+      "weight": 0.20,
+      "weighted_contribution": 17.0,
+      "checks_performed": {
+        "work_rest_personal_ratio": "GOOD",
+        "consecutive_work_hours": "ACCEPTABLE",
+        "daily_break_adequacy": "GOOD"
+      }
+    },
+    "external_feasibility": {
+      "score": 80.0,
+      "weight": 0.15,
+      "weighted_contribution": 12.0,
+      "checks_performed": {
+        "facility_hours_check": "FAILED",
+        "travel_time_realistic": "PASSED",
+        "activity_duration_reasonable": "PASSED"
+      }
+    },
+    "replanning_robustness": {
+      "score": null,
+      "weight": 0.20,
+      "weighted_contribution": 0,
+      "note": "Not evaluated - no perturbation applied"
+    }
+  },
+  "violations": [
+    {
+      "violation_id": "V1",
+      "type": "time_conflicts",
+      "severity": "high",
+      "dimension": "constraint_satisfaction",
+      "count": 1,
+      "penalty": 10,
+      "details": [
+        {
+          "event1": {
+            "id": "E1",
+            "title": "CS 285: Deep RL Lecture",
+            "time": "10:00-11:30",
+            "day": "Monday"
+          },
+          "event2": {
+            "id": "E2",
+            "title": "CS 285 Project Work",
+            "time": "10:30-12:30",
+            "day": "Monday"
+          },
+          "overlap_minutes": 60,
+          "explanation": "Cannot attend lecture and work on project simultaneously"
+        }
+      ]
+    },
+    {
+      "violation_id": "V2",
+      "type": "chronotype_mismatch",
+      "severity": "medium",
+      "dimension": "persona_alignment",
+      "count": 1,
+      "penalty": 20,
+      "details": [
+        {
+          "event": {
+            "id": "E4",
+            "title": "Deep Work - Project",
+            "time": "20:00-23:00",
+            "day": "Monday"
+          },
+          "persona_peak_hours": "06:00-12:00",
+          "scheduled_time": "20:00-23:00",
+          "explanation": "Important work scheduled at 8pm-11pm for morning person (peak: 6am-12pm). Productivity will be significantly lower.",
+          "recommendation": "Move to morning hours (6am-12pm)"
+        }
+      ]
+    },
+    {
+      "violation_id": "V3",
+      "type": "facility_hours_violation",
+      "severity": "high",
+      "dimension": "external_feasibility",
+      "count": 1,
+      "penalty": 20,
+      "details": [
+        {
+          "event": {
+            "id": "E7",
+            "title": "Workout",
+            "time": "22:30-23:30",
+            "day": "Tuesday",
+            "location": "RSF Gym"
+          },
+          "facility": {
+            "name": "Recreational Sports Facility",
+            "facility_id": "RSF",
+            "operating_hours": {
+              "Tuesday": {
+                "open": "06:00",
+                "close": "23:00"
+              }
+            }
+          },
+          "issue": "Event ends at 23:30, but facility closes at 23:00",
+          "explanation": "Workout scheduled to end 30 minutes after gym closing time",
+          "recommendation": "Move to morning (7am-8am) or earlier evening (6pm-7pm)"
+        }
+      ]
+    },
+    {
+      "violation_id": "V4",
+      "type": "preference_violation",
+      "severity": "low",
+      "dimension": "persona_alignment",
+      "count": 1,
+      "penalty": 5,
+      "details": [
+        {
+          "preference": "Prefer 2-3 hour blocks for project work during peak hours",
+          "violation": "3-hour project work block scheduled at night (20:00-23:00)",
+          "explanation": "While block size is acceptable, timing contradicts peak hour preference"
+        }
+      ]
+    }
+  ],
+  "detailed_metrics": {
+    "time_usage_breakdown": {
+      "work_academic_hours": 22.5,
+      "personal_exercise_hours": 4.0,
+      "sleep_hours": 15.0,
+      "unscheduled_hours": 126.5
+    },
+    "chronotype_alignment": {
+      "total_important_events": 5,
+      "events_in_peak_hours": 3,
+      "alignment_percentage": 60.0,
+      "target_percentage": 80.0
+    },
+    "constraint_compliance": {
+      "mandatory_events_scheduled": 4,
+      "mandatory_events_required": 4,
+      "compliance_rate": 100.0
+    },
+    "feasibility_checks": {
+      "events_checked": 12,
+      "feasible_events": 11,
+      "infeasible_events": 1,
+      "risky_events": 1
+    }
+  },
+  "recommendations": [
+    {
+      "priority": "critical",
+      "issue": "Time conflict on Monday morning",
+      "action": "Remove or reschedule 'CS 285 Project Work' (E2) to avoid overlap with mandatory lecture",
+      "affected_events": ["E1", "E2"]
+    },
+    {
+      "priority": "high",
+      "issue": "Late night work for morning person",
+      "action": "Move 'Deep Work - Project' (E4) from 8pm-11pm to morning slot (e.g., 6am-9am)",
+      "affected_events": ["E4"],
+      "expected_improvement": "+15-20 points in persona_alignment"
+    },
+    {
+      "priority": "high",
+      "issue": "Gym scheduled after closing",
+      "action": "Reschedule Tuesday workout (E7) to earlier time slot (e.g., 7am-8am or 6pm-7pm)",
+      "affected_events": ["E7"],
+      "expected_improvement": "+20 points in external_feasibility"
+    },
+    {
+      "priority": "medium",
+      "issue": "Suboptimal chronotype utilization",
+      "action": "Schedule more project work blocks during peak hours (6am-12pm)",
+      "expected_improvement": "+10-15 points in persona_alignment"
+    }
+  ],
+  "verdict": {
+    "pass": false,
+    "grade": "D",
+    "summary": "Schedule has major issues: time conflict, chronotype mismatch, and facility constraint violation. While work-life balance is good and all mandatory events are included, critical errors prevent this from being a viable schedule.",
+    "estimated_revision_effort": "medium",
+    "key_issues": [
+      "Cannot attend lecture and project work simultaneously",
+      "Gym closes before scheduled workout ends",
+      "Major productivity hours (6am-12pm) underutilized"
+    ]
+  }
+}
+

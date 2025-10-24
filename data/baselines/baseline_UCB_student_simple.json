@@ -1,0 +1,86 @@
+{
+  "baseline_id": "UCB_STUDENT_BASELINE_001",
+  "persona_id": "UCB_MORNING_STUDENT_001",
+  "week_start": "2024-10-21",
+  "recurring_events": [
+    {
+      "event_id": "LECTURE_CS285",
+      "title": "CS 285: Deep RL Lecture",
+      "type": "academic_mandatory",
+      "day_of_week": ["Monday", "Wednesday"],
+      "start_time": "10:00",
+      "end_time": "11:30",
+      "location": "Soda Hall 306",
+      "travel_time_before": 15,
+      "recurrence": "weekly"
+    },
+    {
+      "event_id": "SECTION_CS285",
+      "title": "CS 285: Discussion Section",
+      "type": "academic_mandatory",
+      "day_of_week": ["Friday"],
+      "start_time": "14:00",
+      "end_time": "15:00",
+      "location": "Cory 277",
+      "travel_time_before": 10,
+      "recurrence": "weekly"
+    },
+    {
+      "event_id": "RESEARCH_MEETING",
+      "title": "Research Group Meeting",
+      "type": "work_mandatory",
+      "day_of_week": ["Tuesday"],
+      "start_time": "15:00",
+      "end_time": "16:30",
+      "location": "Berkeley AI Research Lab",
+      "travel_time_before": 10,
+      "recurrence": "weekly"
+    },
+    {
+      "event_id": "ADVISOR_MEETING",
+      "title": "1:1 with Advisor",
+      "type": "work_mandatory",
+      "day_of_week": ["Thursday"],
+      "start_time": "11:00",
+      "end_time": "12:00",
+      "location": "Soda Hall 7th Floor",
+      "travel_time_before": 10,
+      "recurrence": "weekly"
+    },
+    {
+      "event_id": "TA_HOURS",
+      "title": "TA Office Hours",
+      "type": "work_mandatory",
+      "day_of_week": ["Wednesday"],
+      "start_time": "16:00",
+      "end_time": "18:00",
+      "location": "Cory Hall TA Room",
+      "travel_time_before": 10,
+      "recurrence": "weekly"
+    }
+  ],
+  "one_time_events": [
+    {
+      "event_id": "PROJECT_DEADLINE",
+      "title": "CS 285 Project Milestone Due",
+      "type": "deadline",
+      "date": "2024-10-25",
+      "time": "23:59",
+      "preparation_time_needed": 10
+    }
+  ],
+  "baseline_routine": {
+    "sleep": {
+      "typical_bedtime": "22:30",
+      "typical_wake_time": "06:00"
+    },
+    "meals": {
+      "breakfast": "06:30-07:00",
+      "lunch": "12:00-12:30",
+      "dinner": "18:30-19:00"
+    }
+  }
+}
+
+
+

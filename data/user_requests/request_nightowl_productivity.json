@@ -1,0 +1,75 @@
+{
+  "request_id": "REQ_NIGHTOWL_PRODUCTIVITY_001",
+  "persona_id": "NIGHTOWL_ENG_003",
+  "baseline_id": "baseline_nightowl_engineer",
+  "request_type": "persona_alignment_test",
+  "natural_language_prompt": "I want to really buckle down and be more productive this week. I have a major feature launch coming up and need to put in some serious coding hours. Can you help me schedule at least 30 hours of deep coding work this week, plus I want to keep up with my climbing gym sessions (at least 2x) and my side music production project (5 hours)?",
+  "structured_requirements": {
+    "tasks_to_add": [
+      {
+        "task_id": "DEEP_CODING_WORK",
+        "title": "Feature Development - Deep Work",
+        "total_duration_hours": 30,
+        "can_split": true,
+        "preferred_block_size_hours": 3,
+        "priority": "high",
+        "deadline": "2024-10-27T23:59:00",
+        "preferred_time_of_day": "afternoon_evening",
+        "notes": "Night owl - works best 14:00-22:00"
+      },
+      {
+        "task_id": "CLIMBING_GYM",
+        "title": "Climbing Session",
+        "frequency": "2 times this week",
+        "duration_per_session_hours": 2,
+        "can_split": false,
+        "priority": "medium",
+        "preferred_time_of_day": "late_evening",
+        "location": "Touchstone Climbing Gym",
+        "requires_facility_hours_check": true
+      },
+      {
+        "task_id": "MUSIC_PRODUCTION",
+        "title": "Music Production Side Project",
+        "total_duration_hours": 5,
+        "can_split": true,
+        "preferred_block_size_hours": 2,
+        "priority": "medium",
+        "preferred_time_of_day": "late_night",
+        "notes": "Creative work, best done 21:00-24:00"
+      }
+    ],
+    "constraints_to_respect": [
+      "All baseline work commitments are mandatory",
+      "No meetings before 11:00",
+      "Minimum 8 hours sleep (even if late)",
+      "Stand-up at 11:00 daily (can join remotely)"
+    ],
+    "persona_critical_test": [
+      "Should schedule coding during peak hours (14:00-22:00)",
+      "Should NOT schedule deep work early morning",
+      "Should respect night owl sleep pattern (02:00-10:00)",
+      "Music production should be late evening/night"
+    ]
+  },
+  "evaluation_focus": [
+    "persona_alignment",
+    "balance_index",
+    "external_feasibility"
+  ],
+  "expected_challenges": [
+    "30 hours coding + 4 hours climbing + 5 hours music = 39 hours, plus existing commitments",
+    "Risk of work-life imbalance",
+    "Need to check climbing gym late-night hours",
+    "Sleep may be compromised if not scheduled carefully"
+  ],
+  "ideal_solution_characteristics": [
+    "Coding blocks concentrated 15:00-20:00 or 20:00-23:00",
+    "Climbing scheduled for 21:00-23:00 if gym is open",
+    "Music production 23:00-01:00 (late night creative time)",
+    "Sleep maintained at 8 hours (02:00-10:00 or similar)",
+    "Still attends all mandatory meetings"
+  ]
+}
+
+

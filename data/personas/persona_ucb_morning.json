@@ -1,0 +1,49 @@
+{
+  "persona_id": "UCB_MORNING_STUDENT_001",
+  "name": "Alex Chen",
+  "role": "UC Berkeley Graduate Student",
+  "department": "Computer Science",
+  "preferences": {
+    "chronotype": "morning_person",
+    "peak_hours": ["06:00", "12:00"],
+    "sleep_requirement": 7.5,
+    "preferred_sleep_window": ["22:30", "06:00"],
+    "work_life_balance": {
+      "work_study_max_hours_per_day": 10,
+      "exercise_min_hours_per_week": 4,
+      "social_min_hours_per_week": 6,
+      "personal_time_min_hours_per_day": 2
+    },
+    "productivity_style": "deep_work_morning",
+    "break_preference": "short_frequent"
+  },
+  "constraints": {
+    "hard": [
+      "Must attend all scheduled lectures and sections",
+      "Research meetings are mandatory",
+      "Minimum 7 hours sleep per night",
+      "No activities before 06:00 or after 23:00"
+    ],
+    "soft": [
+      "Prefer workout in morning (07:00-09:00)",
+      "Avoid scheduling meetings after 17:00",
+      "Prefer studying in 2-hour blocks",
+      "Lunch break should be 30-60 minutes"
+    ]
+  },
+  "lifestyle": {
+    "commute_method": "bike",
+    "avg_commute_time": 15,
+    "meal_preferences": "cook_at_home",
+    "fitness_activities": ["running", "gym"],
+    "social_activities": ["study_groups", "coffee_with_friends"]
+  },
+  "values": [
+    "academic_excellence",
+    "health_conscious",
+    "time_efficient",
+    "structured_routine"
+  ]
+}
+
+

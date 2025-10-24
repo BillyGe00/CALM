@@ -1,0 +1,69 @@
+{
+  "evaluation_request": {
+    "white_agent_id": "test_white_agent_v1",
+    "persona_id": "UCB_MORNING_STUDENT_001",
+    "baseline_id": "UCB_STUDENT_BASELINE_001",
+    "request_id": "REQ_STUDY_BALANCE_001",
+    "env_id": "ENV_BERKELEY_001"
+  },
+  "context": {
+    "persona": {
+      "name": "Alex Chen",
+      "role": "UC Berkeley Graduate Student",
+      "chronotype": "morning_person",
+      "peak_hours": ["06:00", "12:00"],
+      "sleep_requirement": 7.5,
+      "preferences": {
+        "work_life_balance": {
+          "work_study_max_hours_per_day": 10,
+          "exercise_min_hours_per_week": 4
+        }
+      },
+      "constraints": {
+        "hard": [
+          "CS 285 lectures are mandatory (Mon/Wed 10:00-11:30)",
+          "Research meeting mandatory (Tue 15:00-16:30)",
+          "Minimum 7.5 hours sleep per night"
+        ]
+      }
+    },
+    "baseline_commitments": [
+      {
+        "title": "CS 285: Deep RL Lecture",
+        "days": ["Monday", "Wednesday"],
+        "start_time": "10:00",
+        "end_time": "11:30",
+        "type": "academic_mandatory"
+      },
+      {
+        "title": "Research Group Meeting",
+        "days": ["Tuesday"],
+        "start_time": "15:00",
+        "end_time": "16:30",
+        "type": "work_mandatory"
+      }
+    ],
+    "user_request": {
+      "natural_language": "I have a major project deadline coming up on Oct 25. I need to fit in 15 hours of project work this week, preferably in 2-3 hour blocks when I'm most productive. I also want to maintain my workout routine - at least 4 sessions of 1 hour each. Can you help me plan my week?",
+      "structured_requirements": {
+        "tasks_to_add": [
+          {
+            "title": "CS 285 Project Work",
+            "total_hours": 15,
+            "preferred_block_size": 2,
+            "priority": "high",
+            "deadline": "2024-10-25"
+          },
+          {
+            "title": "Workout",
+            "frequency": 4,
+            "duration_per_session": 1,
+            "priority": "medium"
+          }
+        ]
+      }
+    }
+  },
+  "timestamp": "2024-10-22T14:30:00Z"
+}
+
