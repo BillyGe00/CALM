@@ -16,4 +16,4 @@
   1. ask the white agent to add events to an existing schedule according to natural language user request
   2. ask the white agent to adjust an exsiting schedule according to perturbation
 * It seems that we cannot simply **randomly** choose one baseline, one persona, and one user request to be used as one data sample. We need to carefully choose which baseline, persona, and user request together make up the appropriate pair.
-* Is it possible to simplify the data structure and information? (For example, instead of planning out the entire week's calendar, maybe try only plan out the next day)
+* Is it possible to simplify the data structure and information? (For example, instead of planning out the entire week's calendar, maybe try to only plan out the next day)
