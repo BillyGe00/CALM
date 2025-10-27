@@ -4,7 +4,6 @@
   1. recurring events
   2. one-time events
 * Environment Constraints (immitate external constraints in openning hours and transportation time costs)
-* Ground Truth (evaluation metrics)
 * Personas (immitate real people in terms of lifestyles)
 * Perturbations (emergencies that require calendar changes)
 * User Requests (tasks to be completed by white agents)
