@@ -30,18 +30,18 @@ async def launch_evaluation():
     assert await my_a2a.wait_agent_ready(white_url), "White agent not ready in time"
     print("White agent is ready.")
 
-    # send the task description
+    # send the task description - 使用 calendar 环境
     print("Sending task description to green agent...")
     task_config = {
-        "env": "retail",
+        "env": "calendar",  # 修改：使用 calendar 环境
         "user_strategy": "llm",
-        "user_model": "openai/gpt-4o",
+        "user_model": "gpt-4o",
         "user_provider": "openai",
         "task_split": "test",
-        "task_ids": [1],
+        "task_ids": [0],  # 第一个任务
     }
     task_text = f"""
-Your task is to instantiate tau-bench to test the agent located at:
+Your task is to instantiate CALM to test the agent located at:
 <white_agent_url>
 http://{white_address[0]}:{white_address[1]}/
 </white_agent_url>

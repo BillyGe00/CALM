@@ -2,3 +2,8 @@ envs/data/project_proposal.md
 
 # API Keys - 不要上传到 git
 .env
+
+# 本地参考的外部 repo
+agentify-example-tau-bench/
+tau-bench/
+project_proposal.md

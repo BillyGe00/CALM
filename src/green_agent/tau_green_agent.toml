@@ -1,0 +1,36 @@
+name = "tau_green_agent"
+description = "The assessment hosting agent for CALM calendar scheduling."
+version = "0.1.0"
+
+defaultInputModes = ["text"]
+defaultOutputModes = ["text"]
+[capabilities]
+streaming = false
+
+[[skills]]
+id = "host_assess_calm"
+name = "CALM assessment hosting"
+description = """
+Assess the calendar scheduling ability of an agent.
+"""
+tags = ["green agent", "assessment hosting", "calendar", "calm"]
+examples = ["""    
+Your task is to instantiate CALM to test the agent located at:
+<white_agent_url>
+http://localhost:9002/
+</white_agent_url>
+You should use the following env configuration:
+<env_config>
+{
+  "env": "calendar",
+  "user_strategy": "llm",
+  "user_model": "gpt-4o",
+  "user_provider": "openai",
+  "task_split": "test",
+  "task_ids": [
+    0
+  ]
+}
+</env_config>
+    """]
+
