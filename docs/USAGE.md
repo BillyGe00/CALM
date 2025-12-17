@@ -8,9 +8,11 @@ This document provides hands-on usage instructions and example workflows for run
  - Install dependencies.
  - Run the harness or launcher to execute tasks and collect results.
 
-Example (run all test tasks once using `uv`):
+Example commands and workflows
 
-```powershell
+- Sync workspace and run the main benchmark (recommended):
+
+```bash
 uv sync
 uv run python main.py launch
 ```
@@ -18,6 +20,33 @@ uv run python main.py launch
 Notes:
 - This `uv` workflow also works from Windows Subsystem for Linux (WSL).
 - If `uv` is unavailable you can run `python main.py` directly as a fallback.
+
+Developer Tools
+
+The repository includes a developer-focused test-runner to aggregate per-task results and write a final summary. Use these commands from the repo root.
+
+- Run the test-runner (all tasks):
+
+```bash
+uv sync
+uv run python tools/run_all_tests.py --model_provider openai --model gpt-4o
+```
+
+- Run the test-runner for a single task:
+
+```bash
+uv sync
+uv run python tools/run_all_tests.py --task_id 3 --model_provider openai --model gpt-4o
+```
+
+- Run the test-runner as a module (alternative):
+
+```bash
+uv sync
+uv run python -m tools.run_all_tests --model_provider openai --model gpt-4o
+```
+
+Fallback: use `PYTHONPATH=.` when running the test-runner directly so project imports resolve correctly.
 
 2) Running a specific task or set of tasks
 

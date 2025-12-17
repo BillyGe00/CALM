@@ -79,13 +79,64 @@ High level options for running experiments:
 
 - Use the harness to run multiple tasks and trials and produce aggregated summaries.
 - Start the green and white agents via the launcher for interactive or distributed testing.
+Commands
 
-Example (single task run):
+Below are common commands for running the suite. Run these from the repository root.
 
-```powershell
-python -m calm_bench.run --env calendar --agent_strategy tool-calling --model <MODEL> --user_model openai/gpt-4o
+- Sync workspace and run the main benchmark (recommended):
+
+```bash
+uv sync
+uv run python main.py launch
 ```
 
+- Fallback (no `uv`):
+
+```bash
+python main.py
+```
+
+Adjust `--task_split` (`test`, `train`, `dev`) and `--task_ids` to run specific tasks. See `calm_bench/run.py` for the CLI and supported arguments.
+
+Developer Tools
+
+The repository includes a small test-runner that aggregates task-level results and writes a final summary. This is intended for development and CI workflows.
+
+- Run the test-runner (all tasks):
+
+```bash
+uv sync
+uv run python tools/run_all_tests.py --model_provider openai --model gpt-4o
+```
+
+- Run the test-runner for a single task:
+
+```bash
+uv sync
+uv run python tools/run_all_tests.py --task_id 3 --model_provider openai --model gpt-4o
+```
+
+- Run the test-runner for multiple tasks:
+
+```bash
+uv sync
+uv run python tools/run_all_tests.py --task_ids 1,2,5 --model_provider openai --model gpt-4o
+```
+
+- Run the test-runner as a module (alternative):
+
+```bash
+uv sync
+uv run python -m tools.run_all_tests --model_provider openai --model gpt-4o
+```
+
+- Fallback (no `uv`):
+
+```bash
+PYTHONPATH=. python tools/run_all_tests.py --model_provider openai --model gpt-4o
+# PowerShell:
+# $env:PYTHONPATH = "."; python tools/run_all_tests.py --model_provider openai --model gpt-4o
+```
 Adjust `--task_split` (`test`, `train`, `dev`) and `--task_ids` to run specific tasks. See `calm_bench/run.py` for the CLI and supported arguments.
 
 ---
