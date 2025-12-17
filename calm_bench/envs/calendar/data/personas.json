@@ -54,5 +54,18 @@
         {"days": ["friday"], "time": "15:00-17:00"}
       ]
     }
+    ,
+    {
+      "id": "fully_booked",
+      "name": "Pat Full",
+      "role": "Always Busy",
+      "chronotype": "flexible",
+      "wake_time": "06:00",
+      "sleep_time": "23:59",
+      "busy_blocks": [
+        {"days": ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"], "time": "00:00-23:59"}
+      ]
+    }
   ]
 }
+

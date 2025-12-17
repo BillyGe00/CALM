@@ -138,6 +138,29 @@ TASKS_TEST = [
         ],
     ),
     Task(
+        user_id="fully_booked",
+        instruction=(
+            "Attempt to schedule any 30-minute meeting for `fully_booked` on Thursday — the user is fully booked all day, so scheduling should be impossible."
+        ),
+        actions=[
+            Action(name="get_calendar", kwargs={"user_id": "fully_booked"}),
+            Action(name="get_free_slots", kwargs={"user_id": "fully_booked", "day_of_week": "thursday", "min_duration_minutes": 30}),
+            Action(name="add_event", kwargs={
+                "user_id": "fully_booked",
+                "day_of_week": "thursday",
+                "start_time": "14:00",
+                "end_time": "14:30",
+                "location": "office",
+                "priority": "high",
+                "is_flexible": False
+            }),
+            Action(name="get_calendar", kwargs={"user_id": "fully_booked"})
+        ],
+        outputs=[
+            "cannot schedule",
+        ],
+    ),
+    Task(
         user_id="busy_person",
         instruction=(
             "Intentionally attempt to schedule a 30-minute block during busy_person's sleep window (00:30-01:00 on Thursday)."
@@ -206,5 +229,149 @@ TASKS_TEST = [
         outputs=[
             "cannot schedule",
         ],
+    ),
+    Task(
+        user_id="graduate_student",
+        instruction="Try scheduling 10:30-11:00 on Thursday (conflicts with a busy block).",
+        actions=[
+            Action(name="get_free_slots", kwargs={"user_id": "graduate_student", "day_of_week": "thursday", "min_duration_minutes": 30}),
+            Action(name="add_event", kwargs={
+                "user_id": "graduate_student",
+                "day_of_week": "thursday",
+                "start_time": "10:30",
+                "end_time": "11:00",
+                "location": "library",
+                "priority": "low",
+                "is_flexible": False
+            }),
+            Action(name="get_calendar", kwargs={"user_id": "graduate_student"})
+        ],
+        outputs=["cannot schedule"],
+    ),
+    Task(
+        user_id="working_parent",
+        instruction="Attempt a 30-minute meeting at 07:45 on Thursday (during commute/busy morning).",
+        actions=[
+            Action(name="get_free_slots", kwargs={"user_id": "working_parent", "day_of_week": "thursday", "min_duration_minutes": 30}),
+            Action(name="add_event", kwargs={
+                "user_id": "working_parent",
+                "day_of_week": "thursday",
+                "start_time": "07:45",
+                "end_time": "08:15",
+                "location": "car",
+                "priority": "medium",
+                "is_flexible": False
+            }),
+            Action(name="get_calendar", kwargs={"user_id": "working_parent"})
+        ],
+        outputs=["cannot schedule"],
+    ),
+    Task(
+        user_id="fitness_enthusiast",
+        instruction="Try to schedule a 4-hour training block 09:00-13:00 on Monday (overlaps work).",
+        actions=[
+            Action(name="get_free_slots", kwargs={"user_id": "fitness_enthusiast", "day_of_week": "monday", "min_duration_minutes": 240}),
+            Action(name="add_event", kwargs={
+                "user_id": "fitness_enthusiast",
+                "day_of_week": "monday",
+                "start_time": "09:00",
+                "end_time": "13:00",
+                "location": "gym",
+                "priority": "low",
+                "is_flexible": False
+            }),
+            Action(name="get_calendar", kwargs={"user_id": "fitness_enthusiast"})
+        ],
+        outputs=["cannot schedule"],
+    ),
+    Task(
+        user_id="busy_person",
+        instruction="Schedule a late-evening flexible meeting 22:00-22:30 on Thursday (should succeed).",
+        actions=[
+            Action(name="get_free_slots", kwargs={"user_id": "busy_person", "day_of_week": "thursday", "min_duration_minutes": 30}),
+            Action(name="add_event", kwargs={
+                "user_id": "busy_person",
+                "day_of_week": "thursday",
+                "start_time": "22:00",
+                "end_time": "22:30",
+                "location": "online",
+                "priority": "low",
+                "is_flexible": True
+            }),
+            Action(name="get_calendar", kwargs={"user_id": "busy_person"})
+        ],
+        outputs=["22:00 to 22:30"],
+    ),
+    Task(
+        user_id="fully_booked",
+        instruction="Try another time for `fully_booked` (09:00-09:30) — still impossible.",
+        actions=[
+            Action(name="get_free_slots", kwargs={"user_id": "fully_booked", "day_of_week": "thursday", "min_duration_minutes": 30}),
+            Action(name="add_event", kwargs={
+                "user_id": "fully_booked",
+                "day_of_week": "thursday",
+                "start_time": "09:00",
+                "end_time": "09:30",
+                "location": "office",
+                "priority": "high",
+                "is_flexible": False
+            }),
+            Action(name="get_calendar", kwargs={"user_id": "fully_booked"})
+        ],
+        outputs=["cannot schedule"],
+    ),
+    Task(
+        user_id="working_parent",
+        instruction="High-priority meeting requested at 10:00-11:00 on Thursday (during work hours) — expect conflict handling.",
+        actions=[
+            Action(name="get_free_slots", kwargs={"user_id": "working_parent", "day_of_week": "thursday", "min_duration_minutes": 60}),
+            Action(name="add_event", kwargs={
+                "user_id": "working_parent",
+                "day_of_week": "thursday",
+                "start_time": "10:00",
+                "end_time": "11:00",
+                "location": "office",
+                "priority": "high",
+                "is_flexible": False
+            }),
+            Action(name="get_calendar", kwargs={"user_id": "working_parent"})
+        ],
+        outputs=["cannot schedule"],
+    ),
+    Task(
+        user_id="busy_person",
+        instruction="Attempt 23:00-23:59 meeting on Thursday (late night slot; should succeed if free).",
+        actions=[
+            Action(name="get_free_slots", kwargs={"user_id": "busy_person", "day_of_week": "thursday", "min_duration_minutes": 59}),
+            Action(name="add_event", kwargs={
+                "user_id": "busy_person",
+                "day_of_week": "thursday",
+                "start_time": "23:00",
+                "end_time": "23:59",
+                "location": "online",
+                "priority": "low",
+                "is_flexible": True
+            }),
+            Action(name="get_calendar", kwargs={"user_id": "busy_person"})
+        ],
+        outputs=["23:00 to 23:59"],
+    ),
+    Task(
+        user_id="fitness_enthusiast",
+        instruction="Try to schedule 06:00-07:30 on Monday (matches their early busy block) — expect cannot schedule.",
+        actions=[
+            Action(name="get_free_slots", kwargs={"user_id": "fitness_enthusiast", "day_of_week": "monday", "min_duration_minutes": 90}),
+            Action(name="add_event", kwargs={
+                "user_id": "fitness_enthusiast",
+                "day_of_week": "monday",
+                "start_time": "06:00",
+                "end_time": "07:30",
+                "location": "gym",
+                "priority": "medium",
+                "is_flexible": False
+            }),
+            Action(name="get_calendar", kwargs={"user_id": "fitness_enthusiast"})
+        ],
+        outputs=["cannot schedule"],
     ),
 ]
