@@ -55,6 +55,7 @@ class SolveResult(BaseModel):
     messages: List[Dict[str, Any]]
     info: Dict[str, Any]
     total_cost: Optional[float] = None
+    trace: Optional[List[Dict[str, Any]]] = None
 
 
 class EnvInfo(BaseModel):
@@ -82,6 +83,7 @@ class EnvRunResult(BaseModel):
     info: Dict[str, Any]
     traj: List[Dict[str, Any]]
     trial: int
+    trace: Optional[List[Dict[str, Any]]] = None
 
 
 class RunConfig(BaseModel):
@@ -103,3 +105,6 @@ class RunConfig(BaseModel):
     shuffle: int = 0
     user_strategy: str = "llm"
     few_shot_displays_path: Optional[str] = None
+    emit_trace: bool = False
+    process_eval: bool = False
+    process_eval_model: Optional[str] = None

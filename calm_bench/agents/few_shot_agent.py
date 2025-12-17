@@ -20,7 +20,9 @@ class FewShotToolCallingAgent(Agent):
         few_shot_displays: List[str],
         temperature: float = 0.0,
         num_few_shots: int = 5,
+        emit_trace: bool = False,
     ):
+        super().__init__(emit_trace=emit_trace)
         self.tools_info = tools_info
         self.wiki = wiki
         self.model = model
@@ -40,6 +42,7 @@ class FewShotToolCallingAgent(Agent):
         total_cost = 0.0
         env_reset_res = env.reset(task_index=task_index)
         obs = env_reset_res.observation
+        self.emit_trace("reset", {"observation": obs, "task_index": task_index})
         info = env_reset_res.info.model_dump()
         reward = 0.0
         messages: List[Dict[str, Any]] = [
@@ -55,9 +58,11 @@ class FewShotToolCallingAgent(Agent):
                 temperature=self.temperature,
             )
             next_message = res.choices[0].message.model_dump()
+            self.emit_trace("model_response", {"content_len": len(next_message.get("content") or "")})
             total_cost += res._hidden_params["response_cost"]
             action = message_to_action(next_message)
             env_response = env.step(action)
+            self.emit_trace("env_response", {"action": action.name, "action_kwargs": action.kwargs, "observation": env_response.observation, "reward": env_response.reward, "done": env_response.done})
             reward = env_response.reward
             info = {**info, **env_response.info.model_dump()}
             if action.name != RESPOND_ACTION_NAME:
@@ -87,6 +92,7 @@ class FewShotToolCallingAgent(Agent):
             info=info,
             messages=messages,
             total_cost=total_cost,
+            trace=self._trace,
         )
 
 

@@ -49,6 +49,9 @@ def parse_args():
     p.add_argument("--seed", type=int, default=10)
     p.add_argument("--shuffle", type=int, default=0)
     p.add_argument("--user_strategy", default="llm")
+    p.add_argument("--emit_trace", action="store_true", help="Emit per-step traces from agents into checkpoints")
+    p.add_argument("--process_eval", action="store_true", help="Run simple process evaluation on emitted traces")
+    p.add_argument("--process_eval_model", default=None, help="Optional model to use for LLM-based process scoring (disabled by default)")
     return p.parse_args()
 
 
@@ -152,6 +155,9 @@ def main():
         seed=args.seed,
         shuffle=args.shuffle,
         user_strategy=args.user_strategy,
+        emit_trace=args.emit_trace,
+        process_eval=args.process_eval,
+        process_eval_model=args.process_eval_model,
     )
 
     print("Running harness with config:", config.dict())

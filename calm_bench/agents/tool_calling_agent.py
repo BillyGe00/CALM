@@ -17,7 +17,9 @@ class ToolCallingAgent(Agent):
         model: str,
         provider: str,
         temperature: float = 0.0,
+        emit_trace: bool = False,
     ):
+        super().__init__(emit_trace=emit_trace)
         self.tools_info = tools_info
         self.wiki = wiki
         self.model = model
@@ -36,6 +38,7 @@ class ToolCallingAgent(Agent):
             {"role": "system", "content": self.wiki},
             {"role": "user", "content": obs},
         ]
+        self.emit_trace("reset", {"observation": obs, "task_index": task_index})
         for _ in range(max_num_steps):
             res = completion(
                 messages=messages,
@@ -45,9 +48,12 @@ class ToolCallingAgent(Agent):
                 temperature=self.temperature,
             )
             next_message = res.choices[0].message.model_dump()
+            # emit a compact model response trace (avoid storing full prompts)
+            self.emit_trace("model_response", {"tool_calls": [tc.get("function", {}).get("name") for tc in (next_message.get("tool_calls") or [])], "content_len": len(next_message.get("content") or "")})
             total_cost += res._hidden_params["response_cost"] or 0
             action = message_to_action(next_message)
             env_response = env.step(action)
+            self.emit_trace("env_response", {"action": action.name, "action_kwargs": action.kwargs, "observation": env_response.observation, "reward": env_response.reward, "done": env_response.done})
             reward = env_response.reward
             info = {**info, **env_response.info.model_dump()}
             if action.name != RESPOND_ACTION_NAME:
@@ -77,6 +83,7 @@ class ToolCallingAgent(Agent):
             info=info,
             messages=messages,
             total_cost=total_cost,
+            trace=self._trace,
         )
 
 

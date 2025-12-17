@@ -23,7 +23,9 @@ class ChatReActAgent(Agent):
         provider: str,
         use_reasoning: bool = True,
         temperature: float = 0.0,
+        emit_trace: bool = False,
     ) -> None:
+        super().__init__(emit_trace=emit_trace)
         instruction = REACT_INSTRUCTION if use_reasoning else ACT_INSTRUCTION
         self.prompt = (
             wiki + "\n#Available tools\n" + json.dumps(tools_info) + instruction
@@ -44,6 +46,11 @@ class ChatReActAgent(Agent):
             temperature=self.temperature,
         )
         message = res.choices[0].message
+        # emit compact model response trace
+        try:
+            self.emit_trace("model_response", {"content_len": len(message.content or "" )})
+        except Exception:
+            pass
         action_str = message.content.split("Action:")[-1].strip()
         try:
             action_parsed = json.loads(action_str)
@@ -62,6 +69,7 @@ class ChatReActAgent(Agent):
         self, env: Env, task_index: Optional[int] = None, max_num_steps: int = 30
     ) -> SolveResult:
         response = env.reset(task_index=task_index)
+        self.emit_trace("reset", {"observation": response.observation, "task_index": task_index})
         reward = 0.0
         messages: List[Dict[str, Any]] = [
             {"role": "system", "content": self.prompt},
@@ -72,6 +80,7 @@ class ChatReActAgent(Agent):
         for _ in range(max_num_steps):
             message, action, cost = self.generate_next_step(messages)
             response = env.step(action)
+            self.emit_trace("env_response", {"action": action.name, "action_kwargs": action.kwargs, "observation": response.observation, "reward": response.reward, "done": response.done})
             obs = response.observation
             reward = response.reward
             info = {**info, **response.info.model_dump()}
@@ -90,6 +99,7 @@ class ChatReActAgent(Agent):
             messages=messages,
             reward=reward,
             info=info,
+            trace=self._trace,
         )
 
 

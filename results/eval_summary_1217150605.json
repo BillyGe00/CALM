@@ -1,0 +1,121 @@
+{
+  "average_reward": 1.0,
+  "num_tasks": 1,
+  "per_dimension": {
+    "constraint_satisfaction": {
+      "mean": 1.0,
+      "count": 1
+    },
+    "persona_alignment": {
+      "mean": 1.0,
+      "count": 1
+    },
+    "replanning_robustness": {
+      "mean": 1.0,
+      "count": 1
+    },
+    "external_feasibility": {
+      "mean": 1.0,
+      "count": 1
+    }
+  },
+  "venue_violations": {},
+  "total_conflicts_reported": 0,
+  "per_task": {
+    "6": {
+      "reward": 1.0,
+      "scores": {
+        "constraint_satisfaction": 1.0,
+        "persona_alignment": 1.0,
+        "replanning_robustness": 1.0,
+        "external_feasibility": 1.0
+      },
+      "raw": {
+        "reward": 1.0,
+        "info": {
+          "constraint_satisfaction": 1.0,
+          "persona_alignment": 1.0,
+          "balance_index": 1.0,
+          "replanning_robustness": 1.0,
+          "external_feasibility": 1.0,
+          "weights": {
+            "constraint_satisfaction": 0.35,
+            "persona_alignment": 0.3,
+            "replanning_robustness": 0.2,
+            "external_feasibility": 0.15
+          },
+          "details": {
+            "constraint_satisfaction": {
+              "conflicts": [],
+              "sleep_violations": []
+            },
+            "persona_alignment": {
+              "note": "No new events to check"
+            },
+            "replanning_robustness": {
+              "note": "No perturbation scenario"
+            },
+            "external_feasibility": {
+              "note": "No events with venue to check"
+            }
+          }
+        },
+        "actions": [
+          {
+            "name": "get_persona",
+            "kwargs": {
+              "persona_id": "graduate_student"
+            }
+          },
+          {
+            "name": "get_free_slots",
+            "kwargs": {
+              "user_id": "graduate_student",
+              "day_of_week": "thursday"
+            }
+          },
+          {
+            "name": "add_event",
+            "kwargs": {
+              "user_id": "graduate_student",
+              "day_of_week": "thursday",
+              "start_time": "08:00",
+              "end_time": "08:30",
+              "priority": "medium",
+              "is_flexible": true
+            }
+          }
+        ]
+      },
+      "process_scores": {
+        "tool_call_count": 3,
+        "tool_names": [
+          "get_persona",
+          "get_free_slots",
+          "add_event"
+        ],
+        "model_response_count": 9,
+        "env_response_count": 9,
+        "tool_call_success_rate": 1.0,
+        "rounds": 9,
+        "expected_rounds": 4,
+        "rounds_efficiency": 0.4444444444444444,
+        "constraint_ok_fraction": null,
+        "llm": {
+          "constraint_satisfaction": 1.0,
+          "persona_alignment": 0.9,
+          "replanning_robustness": 0.8,
+          "external_feasibility": 0.9,
+          "note": "The agent effectively used the persona information to schedule a meeting, aligning with the user's preferences and constraints. It handled the lack of specific lecture time by suggesting an early meeting, showing good replanning. The process was feasible and aligned with the user's needs."
+        }
+      }
+    }
+  },
+  "pass_hat_ks": {
+    "1": 1.0
+  },
+  "process": {
+    "tool_call_success_rate_mean": 1.0,
+    "rounds_mean": 9.0
+  }
+}
