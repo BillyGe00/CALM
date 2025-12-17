@@ -43,7 +43,12 @@ async def ask_agent_to_solve(white_agent_url, env, task_index, max_num_steps=30)
     # Here, instead of calling white agent like calling an LLM, we need to present
     #   the assessment scenario to the white agent as if it is a independent task
     # Specifically, here we provide the tool information for the agent to reply with
+    # Always use the user_id from the Task for all tool calls. Do not infer or substitute another persona from the instruction.
+    system_message = f"""
+SYSTEM: For all tool calls, ALWAYS use the user_id: {env.task.user_id} provided in the task. Do NOT infer or substitute another persona from the instruction. All tool kwargs must include this user_id.
+"""
     task_description = f"""
+{system_message}
 {env.wiki}
 Here's a list of tools you can use (you can use at most one tool at a time):
 {json.dumps(env.tools_info, indent=2)}

@@ -74,6 +74,7 @@ class Env(object):
             user_strategy=user_strategy, model=user_model, provider=user_provider
         )
         self.actions: List[Action] = []
+        self.real_actions: List[Action] = []
 
     def reset(self, task_index: Optional[int] = None) -> EnvResetResponse:
         if task_index is None:
@@ -87,8 +88,10 @@ class Env(object):
             observation=initial_observation, info=EnvInfo(task=self.task, source="user")
         )
 
-    def step(self, action: Action) -> EnvResponse:
+    def step(self, action: Action, record_real: bool = True) -> EnvResponse:
         self.actions.append(action)
+        if record_real:
+            self.real_actions.append(action)
 
         info = EnvInfo(task=self.task)
         reward = 0
@@ -131,9 +134,12 @@ class Env(object):
         # Check if the database changes are correct. If they are not correct, then we set the reward to 0.
         # TODO: cache gt_data_hash in tasks.py (low priority)
         self.data = self.data_load_func()
+        # Only replay actions for data hash checking, but preserve real agent actions for output checking
+        self.actions = []
+        # Do not record replayed actions as real agent actions
         for action in self.task.actions:
             if action.name not in self.terminate_tools:
-                self.step(action)
+                self.step(action, record_real=False)
         gt_data_hash = self.get_data_hash()
         info = RewardActionInfo(
             r_actions=data_hash == gt_data_hash, gt_data_hash=gt_data_hash
@@ -142,21 +148,36 @@ class Env(object):
             reward = 0.0
 
         if len(self.task.outputs) > 0:
-            # check outputs
+            # check outputs using real agent actions
             r_outputs = 1.0
             outputs = {}
+            import re
             for output in self.task.outputs:
+                # Extract time range from output (e.g., '08:00 to 09:00')
+                time_match = re.search(r"(\d{2}:\d{2}) to (\d{2}:\d{2})", output)
                 found = False
-                for action in self.actions:
-                    if (
-                        action.name == RESPOND_ACTION_NAME
-                        and output.lower()
-                        in action.kwargs["content"].lower().replace(",", "")
-                    ):
-                        found = True
-                        break
+                print(f"[DEBUG] Checking output: '{output}'")
+                for action in self.real_actions:
+                    if action.name == RESPOND_ACTION_NAME:
+                        content = action.kwargs["content"].lower().replace(",", "")
+                        print(f"[DEBUG] Against response: '{content}'")
+                        if time_match:
+                            # Only require the time range to be present
+                            time_str = f"{time_match.group(1)} to {time_match.group(2)}"
+                            print(f"[DEBUG] Looking for time_str: '{time_str}'")
+                            if time_str in content:
+                                print("[DEBUG] Match found!")
+                                found = True
+                                break
+                        else:
+                            # Fallback to original substring match
+                            if output.lower() in content:
+                                print("[DEBUG] Fallback match found!")
+                                found = True
+                                break
                 outputs[output] = found
                 if not found:
+                    print(f"[DEBUG] No match for output: '{output}'")
                     r_outputs = 0.0
                     reward = 0.0
             info = RewardOutputInfo(r_outputs=r_outputs, outputs=outputs)

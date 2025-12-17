@@ -28,4 +28,38 @@ TASKS_TEST = [
             "Performance Review from 15:00 to 15:30 at Manager's Office"
         ],
     ),
+    Task(
+        user_id="busy_person",
+        instruction="Find a free 1-hour slot for busy_person on Thursday and schedule a gym session.",
+        actions=[
+            Action(
+                name="get_calendar",
+                kwargs={"user_id": "busy_person"}
+            ),
+            Action(
+                name="get_free_slots",
+                kwargs={"user_id": "busy_person", "day_of_week": "thursday", "min_duration_minutes": 60}
+            ),
+            # Assume the free slot found is 10:00-11:00 for this example
+            Action(
+                name="add_event",
+                kwargs={
+                    "user_id": "busy_person",
+                    "day_of_week": "thursday",
+                    "start_time": "10:00",
+                    "end_time": "11:00",
+                    "location": "gym",
+                    "priority": "medium",
+                    "is_flexible": True
+                }
+            ),
+            Action(
+                name="get_calendar",
+                kwargs={"user_id": "busy_person"}
+            )
+        ],
+        outputs=[
+            "08:00 to 09:00"
+        ],
+    ),
 ]
