@@ -33,6 +33,18 @@ Indices below are zero-based and correspond to positions in `TASKS_TEST`.
 26. driver_day — schedule driving shift at 07:00 (conflict with commute)
 27. driver_night — schedule night shift at 22:30 (should be allowed for night driver)
 28. fully_booked_variant — half-day fully booked attempt (expect cannot schedule)
+29. corporate_onsite — (Appended) Schedule two back-to-back meetings on Thursday with travel buffer (09:30-10:00 at Building A, then 10:00-10:45 at Offsite Center).
+30. working_parent — (Appended) Schedule a 30-minute high-priority doctor appointment at 14:00 on Thursday and reschedule low-priority meal-prep if needed (14:00-14:30).
+31. corporate_remote — (Appended) Schedule a 30-minute sync at 09:00 in EST while Dana's calendar is stored in PST (timezone conversion check).
+32. graduate_student — (Appended) Create a weekly recurring 1-hour reading group on Thursdays at 17:00 for 4 weeks (avoid class conflicts).
+33. driver_day — (Appended) Attempt to schedule an event at 02:30 on the day of a daylight savings forward shift (non-existent time; expect cannot schedule).
+34. fully_booked — (Appended) Attempt to add an all-day event on Thursday (refuse if calendar full of all-day reservations).
+35. busy_person — (Appended) Schedule a 20-minute follow-up that must occur after an existing 30-minute meeting (chain events correctly: 11:00-11:20).
+36. corporate_onsite — (Appended) Schedule three short 20-minute checkpoints with at least 15-minute buffers between them (09:00-09:20, 09:35-09:55, 10:10-10:30).
+37. fitness_enthusiast — (Appended) Request an 8-hour focus block when only 6 continuous hours are free (expect agent to propose alternatives).
+38. working_parent — (Appended) Two high-priority meetings requested at the same time; agent should not schedule both (expect cannot schedule).
+39. pet_owner_dog — (Appended) Request a 10-hour volunteer shift spanning midnight; agent should not schedule across sleep boundary (expect cannot schedule).
+40. writer_nightowl — (Appended) Schedule a 90-minute late-night session starting 23:30 and ending after midnight (23:30-01:00; respect sleep windows).
 
 Notes:
 - "cannot schedule" indicates the test expects the agent to refuse or report a conflict; depending on agent behavior, the evaluator will record reward components accordingly.

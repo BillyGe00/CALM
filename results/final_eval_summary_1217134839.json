@@ -1,0 +1,115 @@
+{
+  "average_reward": 1.0,
+  "num_tasks": 1,
+  "per_dimension": {
+    "constraint_satisfaction": {
+      "mean": 1.0,
+      "count": 1
+    },
+    "persona_alignment": {
+      "mean": 1.0,
+      "count": 1
+    },
+    "replanning_robustness": {
+      "mean": 1.0,
+      "count": 1
+    },
+    "external_feasibility": {
+      "mean": 1.0,
+      "count": 1
+    }
+  },
+  "per_task": {
+    "39": {
+      "reward": 1.0,
+      "scores": {
+        "constraint_satisfaction": 1.0,
+        "persona_alignment": 1.0,
+        "replanning_robustness": 1.0,
+        "external_feasibility": 1.0
+      },
+      "raw": {
+        "reward": 1.0,
+        "info": {
+          "constraint_satisfaction": 1.0,
+          "persona_alignment": 1.0,
+          "balance_index": 1.0,
+          "replanning_robustness": 1.0,
+          "external_feasibility": 1.0,
+          "weights": {
+            "constraint_satisfaction": 0.35,
+            "persona_alignment": 0.3,
+            "replanning_robustness": 0.2,
+            "external_feasibility": 0.15
+          },
+          "details": {
+            "constraint_satisfaction": {
+              "conflicts": [],
+              "sleep_violations": []
+            },
+            "persona_alignment": {
+              "chronotype_issues": []
+            },
+            "replanning_robustness": {
+              "note": "No perturbation scenario"
+            },
+            "external_feasibility": {
+              "venue_violations": []
+            }
+          }
+        },
+        "actions": [
+          {
+            "name": "get_persona",
+            "kwargs": {
+              "persona_id": "default"
+            }
+          },
+          {
+            "name": "get_persona",
+            "kwargs": {
+              "persona_id": "writer_nightowl"
+            }
+          },
+          {
+            "name": "get_busy_slots",
+            "kwargs": {
+              "user_id": "writer_nightowl",
+              "day_of_week": "monday"
+            }
+          },
+          {
+            "name": "get_free_slots",
+            "kwargs": {
+              "user_id": "writer_nightowl",
+              "day_of_week": "monday",
+              "min_duration_minutes": 120
+            }
+          },
+          {
+            "name": "add_event",
+            "kwargs": {
+              "user_id": "writer_nightowl",
+              "day_of_week": "monday",
+              "start_time": "23:30",
+              "end_time": "01:30",
+              "priority": "medium",
+              "is_flexible": true
+            }
+          },
+          {
+            "name": "update_event",
+            "kwargs": {
+              "user_id": "writer_nightowl",
+              "event_id": "evt_2b2a099e",
+              "end_time": "00:30"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "pass_hat_ks": {
+    "1": 1.0
+  }
+}

@@ -538,4 +538,165 @@ TASKS_TEST = [
         ],
         outputs=["cannot schedule"],
     ),
+    # --- Appended challenging tests ---
+    Task(
+        user_id="corporate_onsite",
+        instruction=(
+            "Schedule two back-to-back meetings for corporate_onsite on Thursday: 09:30-10:00 in Building A, "
+            "then 10:00-10:45 at Offsite Center. Include travel buffer; refuse if impossible."
+        ),
+        actions=[
+            Action(name="get_venue_hours", kwargs={"venue_id": "Conference Room A", "day": "thursday"}),
+            Action(name="get_venue_hours", kwargs={"venue_id": "Offsite Center", "day": "thursday"}),
+            Action(name="get_free_slots", kwargs={"user_id": "corporate_onsite", "day_of_week": "thursday", "min_duration_minutes": 30}),
+            Action(name="add_event", kwargs={"user_id": "corporate_onsite", "day_of_week": "thursday", "start_time": "09:30", "end_time": "10:00", "location": "Conference Room A", "priority": "high", "is_flexible": False}),
+            Action(name="add_event", kwargs={"user_id": "corporate_onsite", "day_of_week": "thursday", "start_time": "10:00", "end_time": "10:45", "location": "Offsite Center", "priority": "high", "is_flexible": False}),
+            Action(name="get_calendar", kwargs={"user_id": "corporate_onsite"}),
+        ],
+        outputs=["cannot schedule"],
+    ),
+    Task(
+        user_id="working_parent",
+        instruction=(
+            "Schedule a 30-minute high-priority doctor appointment at 14:00 on Thursday; if a low-priority meal-prep occupies that slot, reschedule it rather than canceling."
+        ),
+        actions=[
+            Action(name="get_calendar", kwargs={"user_id": "working_parent"}),
+            Action(name="get_free_slots", kwargs={"user_id": "working_parent", "day_of_week": "thursday", "min_duration_minutes": 30}),
+            Action(name="add_event", kwargs={"user_id": "working_parent", "day_of_week": "thursday", "start_time": "14:00", "end_time": "14:30", "location": "Clinic", "priority": "high", "is_flexible": False}),
+            Action(name="get_calendar", kwargs={"user_id": "working_parent"}),
+        ],
+        outputs=["14:00 to 14:30"],
+    ),
+    Task(
+        user_id="corporate_remote",
+        instruction=(
+            "Schedule a 30-minute sync at 09:00 for Dana in EST while Dana's calendar is stored in PST — ensure correct timezone conversion and avoid conflicts."
+        ),
+        actions=[
+            Action(name="get_persona", kwargs={"user_id": "corporate_remote"}),
+            Action(name="get_calendar", kwargs={"user_id": "corporate_remote"}),
+            Action(name="get_free_slots", kwargs={"user_id": "corporate_remote", "day_of_week": "thursday", "min_duration_minutes": 30}),
+            Action(name="add_event", kwargs={"user_id": "corporate_remote", "day_of_week": "thursday", "start_time": "09:00", "end_time": "09:30", "location": "Video Call", "priority": "medium", "is_flexible": False}),
+            Action(name="get_calendar", kwargs={"user_id": "corporate_remote"}),
+        ],
+        outputs=["09:00 to 09:30"],
+    ),
+    Task(
+        user_id="graduate_student",
+        instruction=(
+            "Create a weekly recurring 1-hour reading group on Thursdays at 17:00 for 4 weeks, avoiding conflicts with existing classes."
+        ),
+        actions=[
+            Action(name="get_calendar", kwargs={"user_id": "graduate_student"}),
+            Action(name="get_free_slots", kwargs={"user_id": "graduate_student", "day_of_week": "thursday", "min_duration_minutes": 60}),
+            Action(name="add_event", kwargs={"user_id": "graduate_student", "day_of_week": "thursday", "start_time": "17:00", "end_time": "18:00", "location": "Seminar Room", "priority": "low", "is_flexible": True, "recurrence": {"freq": "weekly", "count": 4}}),
+            Action(name="get_calendar", kwargs={"user_id": "graduate_student"}),
+        ],
+        outputs=["17:00 to 18:00 (recurs 4 times)"],
+    ),
+    Task(
+        user_id="driver_day",
+        instruction=(
+            "Attempt to schedule an event at 02:30 on the day of a daylight savings forward shift (non-existent time)."
+        ),
+        actions=[
+            Action(name="get_calendar", kwargs={"user_id": "driver_day"}),
+            Action(name="get_free_slots", kwargs={"user_id": "driver_day", "day_of_week": "sunday", "min_duration_minutes": 30}),
+            Action(name="add_event", kwargs={"user_id": "driver_day", "day_of_week": "sunday", "start_time": "02:30", "end_time": "03:00", "location": "Home", "priority": "low", "is_flexible": False}),
+            Action(name="get_calendar", kwargs={"user_id": "driver_day"}),
+        ],
+        outputs=["cannot schedule"],
+    ),
+    Task(
+        user_id="fully_booked",
+        instruction=(
+            "Attempt to add an all-day event on Thursday; verify the agent refuses if calendar is already full of all-day reservations."
+        ),
+        actions=[
+            Action(name="get_calendar", kwargs={"user_id": "fully_booked"}),
+            Action(name="add_event", kwargs={"user_id": "fully_booked", "day_of_week": "thursday", "start_time": "00:00", "end_time": "23:59", "location": "Conference", "priority": "high", "is_flexible": False, "all_day": True}),
+            Action(name="get_calendar", kwargs={"user_id": "fully_booked"}),
+        ],
+        outputs=["cannot schedule"],
+    ),
+    Task(
+        user_id="busy_person",
+        instruction=(
+            "Schedule a 20-minute follow-up that must occur after an existing 30-minute meeting; the agent must chain events so the follow-up starts after the first meeting ends."
+        ),
+        actions=[
+            Action(name="get_calendar", kwargs={"user_id": "busy_person"}),
+            Action(name="add_event", kwargs={"user_id": "busy_person", "day_of_week": "thursday", "start_time": "11:00", "end_time": "11:20", "location": "Phone", "priority": "medium", "is_flexible": True}),
+            Action(name="get_calendar", kwargs={"user_id": "busy_person"}),
+        ],
+        outputs=["11:00 to 11:20"],
+    ),
+    Task(
+        user_id="corporate_onsite",
+        instruction=(
+            "Schedule three short 20-minute checkpoints between 09:00 and 12:00 with at least 15 minutes buffer between them; tests multi-event batching and buffer enforcement."
+        ),
+        actions=[
+            Action(name="get_calendar", kwargs={"user_id": "corporate_onsite"}),
+            Action(name="get_free_slots", kwargs={"user_id": "corporate_onsite", "day_of_week": "thursday", "min_duration_minutes": 20}),
+            Action(name="add_event", kwargs={"user_id": "corporate_onsite", "day_of_week": "thursday", "start_time": "09:00", "end_time": "09:20", "location": "Huddle Room", "priority": "low", "is_flexible": True}),
+            Action(name="add_event", kwargs={"user_id": "corporate_onsite", "day_of_week": "thursday", "start_time": "09:35", "end_time": "09:55", "location": "Huddle Room", "priority": "low", "is_flexible": True}),
+            Action(name="add_event", kwargs={"user_id": "corporate_onsite", "day_of_week": "thursday", "start_time": "10:10", "end_time": "10:30", "location": "Huddle Room", "priority": "low", "is_flexible": True}),
+            Action(name="get_calendar", kwargs={"user_id": "corporate_onsite"}),
+        ],
+        outputs=["09:00 to 09:20, 09:35 to 09:55, 10:10 to 10:30"],
+    ),
+    Task(
+        user_id="fitness_enthusiast",
+        instruction=(
+            "Request a long 8-hour focus block but only 6 continuous hours are free; the agent should propose alternatives rather than incorrectly scheduling beyond availability."
+        ),
+        actions=[
+            Action(name="get_free_slots", kwargs={"user_id": "fitness_enthusiast", "day_of_week": "monday", "min_duration_minutes": 480}),
+            Action(name="add_event", kwargs={"user_id": "fitness_enthusiast", "day_of_week": "monday", "start_time": "08:00", "end_time": "16:00", "location": "Home", "priority": "medium", "is_flexible": False}),
+            Action(name="get_calendar", kwargs={"user_id": "fitness_enthusiast"}),
+        ],
+        outputs=["cannot schedule"],
+    ),
+    Task(
+        user_id="working_parent",
+        instruction=(
+            "Two high-priority meetings requested at the same time for working_parent; the agent must not schedule both and should ask for clarification or prioritize correctly."
+        ),
+        actions=[
+            Action(name="get_calendar", kwargs={"user_id": "working_parent"}),
+            Action(name="get_free_slots", kwargs={"user_id": "working_parent", "day_of_week": "thursday", "min_duration_minutes": 60}),
+            Action(name="add_event", kwargs={"user_id": "working_parent", "day_of_week": "thursday", "start_time": "10:00", "end_time": "11:00", "location": "Office", "priority": "high", "is_flexible": False}),
+            Action(name="add_event", kwargs={"user_id": "working_parent", "day_of_week": "thursday", "start_time": "10:00", "end_time": "11:00", "location": "School", "priority": "high", "is_flexible": False}),
+            Action(name="get_calendar", kwargs={"user_id": "working_parent"}),
+        ],
+        outputs=["cannot schedule"],
+    ),
+    Task(
+        user_id="pet_owner_dog",
+        instruction=(
+            "Request a long 10-hour volunteer shift that would span midnight; the agent should not schedule across the user's sleep boundary and should propose splitting or refuse."
+        ),
+        actions=[
+            Action(name="get_calendar", kwargs={"user_id": "pet_owner_dog"}),
+            Action(name="get_free_slots", kwargs={"user_id": "pet_owner_dog", "day_of_week": "thursday", "min_duration_minutes": 600}),
+            Action(name="add_event", kwargs={"user_id": "pet_owner_dog", "day_of_week": "thursday", "start_time": "18:00", "end_time": "04:00", "location": "Shelter", "priority": "medium", "is_flexible": False}),
+            Action(name="get_calendar", kwargs={"user_id": "pet_owner_dog"}),
+        ],
+        outputs=["cannot schedule"],
+    ),
+    Task(
+        user_id="writer_nightowl",
+        instruction=(
+            "Schedule a 90-minute late-night session that starts at 23:30 and ends after midnight; ensure it respects the persona's sleep window and does not violate constraints."
+        ),
+        actions=[
+            Action(name="get_calendar", kwargs={"user_id": "writer_nightowl"}),
+            Action(name="get_free_slots", kwargs={"user_id": "writer_nightowl", "day_of_week": "thursday", "min_duration_minutes": 90}),
+            Action(name="add_event", kwargs={"user_id": "writer_nightowl", "day_of_week": "thursday", "start_time": "23:30", "end_time": "01:00", "location": "Home", "priority": "medium", "is_flexible": True}),
+            Action(name="get_calendar", kwargs={"user_id": "writer_nightowl"}),
+        ],
+        outputs=["23:30 to 01:00"],
+    ),
 ]
