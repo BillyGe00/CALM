@@ -14,9 +14,9 @@ from a2a.types import AgentCard, SendMessageSuccessResponse, Message
 from a2a.utils import new_agent_text_message, get_text_parts
 from src.my_util import parse_tags, my_a2a
 
-# from tau_bench.agents.tool_calling_agent import ToolCallingAgent
-from tau_bench.envs import get_env
-from tau_bench.types import SolveResult, RESPOND_ACTION_NAME, Action
+# from calm_bench.agents.tool_calling_agent import ToolCallingAgent
+from calm_bench.envs import get_env
+from calm_bench.types import SolveResult, RESPOND_ACTION_NAME, Action
 
 dotenv.load_dotenv()
 

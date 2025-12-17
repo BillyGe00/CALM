@@ -1,0 +1,64 @@
+{
+  "venues": {
+    "gym": {
+      "name": "Campus Fitness Center",
+      "hours": {
+        "monday": {"open": "06:00", "close": "22:00"},
+        "tuesday": {"open": "06:00", "close": "22:00"},
+        "wednesday": {"open": "06:00", "close": "22:00"},
+        "thursday": {"open": "06:00", "close": "22:00"},
+        "friday": {"open": "06:00", "close": "22:00"},
+        "saturday": {"open": "08:00", "close": "20:00"},
+        "sunday": {"open": "08:00", "close": "20:00"}
+      }
+    },
+    "library": {
+      "name": "University Library",
+      "hours": {
+        "monday": {"open": "08:00", "close": "24:00"},
+        "tuesday": {"open": "08:00", "close": "24:00"},
+        "wednesday": {"open": "08:00", "close": "24:00"},
+        "thursday": {"open": "08:00", "close": "24:00"},
+        "friday": {"open": "08:00", "close": "22:00"},
+        "saturday": {"open": "10:00", "close": "22:00"},
+        "sunday": {"open": "10:00", "close": "22:00"}
+      }
+    },
+    "cafeteria": {
+      "name": "Student Cafeteria",
+      "hours": {
+        "monday": {"open": "07:00", "close": "20:00"},
+        "tuesday": {"open": "07:00", "close": "20:00"},
+        "wednesday": {"open": "07:00", "close": "20:00"},
+        "thursday": {"open": "07:00", "close": "20:00"},
+        "friday": {"open": "07:00", "close": "20:00"},
+        "saturday": {"open": "08:00", "close": "18:00"},
+        "sunday": {"open": "09:00", "close": "17:00"}
+      }
+    },
+    "swimming_pool": {
+      "name": "Community Pool",
+      "hours": {
+        "monday": {"open": "06:00", "close": "21:00"},
+        "tuesday": {"open": "06:00", "close": "21:00"},
+        "wednesday": {"open": "06:00", "close": "21:00"},
+        "thursday": {"open": "06:00", "close": "21:00"},
+        "friday": {"open": "06:00", "close": "21:00"},
+        "saturday": {"open": "08:00", "close": "19:00"},
+        "sunday": {"open": "08:00", "close": "19:00"}
+      }
+    },
+    "grocery_store": {
+      "name": "Fresh Market",
+      "hours": {
+        "monday": {"open": "07:00", "close": "22:00"},
+        "tuesday": {"open": "07:00", "close": "22:00"},
+        "wednesday": {"open": "07:00", "close": "22:00"},
+        "thursday": {"open": "07:00", "close": "22:00"},
+        "friday": {"open": "07:00", "close": "23:00"},
+        "saturday": {"open": "07:00", "close": "23:00"},
+        "sunday": {"open": "08:00", "close": "21:00"}
+      }
+    }
+  }
+}
