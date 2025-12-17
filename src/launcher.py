@@ -38,7 +38,7 @@ async def launch_evaluation():
         "user_model": "openai/gpt-4o",
         "user_provider": "openai",
         "task_split": "test",
-        "task_ids": [2],  # Run the Jordan Lee (busy_person) test
+        "task_ids": [1],  # Run the Jordan Lee (busy_person) test
     }
     task_text = f"""
 Your task is to instantiate tau-bench to test the agent located at:

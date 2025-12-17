@@ -40,14 +40,13 @@ TASKS_TEST = [
                 name="get_free_slots",
                 kwargs={"user_id": "busy_person", "day_of_week": "thursday", "min_duration_minutes": 60}
             ),
-            # Assume the free slot found is 10:00-11:00 for this example
             Action(
                 name="add_event",
                 kwargs={
                     "user_id": "busy_person",
                     "day_of_week": "thursday",
-                    "start_time": "10:00",
-                    "end_time": "11:00",
+                    "start_time": "8:00",
+                    "end_time": "9:00",
                     "location": "gym",
                     "priority": "medium",
                     "is_flexible": True
