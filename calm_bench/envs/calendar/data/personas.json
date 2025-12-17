@@ -66,6 +66,120 @@
         {"days": ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"], "time": "00:00-23:59"}
       ]
     }
+    ,
+    {
+      "id": "professor_morning",
+      "name": "Dr. Priya Rao",
+      "role": "University Professor (Morning)",
+      "chronotype": "morning_person",
+      "wake_time": "06:00",
+      "sleep_time": "22:30",
+      "busy_blocks": [
+        {"days": ["monday","wednesday","friday"], "time": "09:00-12:00"},
+        {"days": ["tuesday"], "time": "14:00-16:00"}
+      ]
+    },
+    {
+      "id": "professor_evening",
+      "name": "Dr. Samir Khan",
+      "role": "University Professor (Evening)",
+      "chronotype": "evening_person",
+      "wake_time": "09:00",
+      "sleep_time": "01:00",
+      "busy_blocks": [
+        {"days": ["monday","thursday"], "time": "13:00-17:00"},
+        {"days": ["wednesday"], "time": "18:00-20:00"}
+      ]
+    },
+    {
+      "id": "corporate_remote",
+      "name": "Dana Lee",
+      "role": "Corporate Remote Worker",
+      "chronotype": "flexible",
+      "wake_time": "07:30",
+      "sleep_time": "23:00",
+      "busy_blocks": [
+        {"days": ["monday","tuesday","wednesday","thursday","friday"], "time": "10:00-16:00"}
+      ]
+    },
+    {
+      "id": "corporate_onsite",
+      "name": "Mark Rivera",
+      "role": "Corporate Office Worker",
+      "chronotype": "morning_person",
+      "wake_time": "06:30",
+      "sleep_time": "22:00",
+      "busy_blocks": [
+        {"days": ["monday","tuesday","wednesday","thursday","friday"], "time": "09:00-17:00"}
+      ]
+    },
+    {
+      "id": "pet_owner_dog",
+      "name": "Olivia Park",
+      "role": "Pet Owner (Dog)",
+      "chronotype": "flexible",
+      "wake_time": "06:30",
+      "sleep_time": "22:30",
+      "busy_blocks": [
+        {"days": ["monday","wednesday","friday"], "time": "08:00-09:00"},
+        {"days": ["sunday"], "time": "10:00-11:00"}
+      ]
+    },
+    {
+      "id": "pet_owner_cat",
+      "name": "Ethan Cole",
+      "role": "Pet Owner (Cat)",
+      "chronotype": "evening_person",
+      "wake_time": "08:30",
+      "sleep_time": "01:30",
+      "busy_blocks": [
+        {"days": ["tuesday","thursday"], "time": "19:00-20:00"}
+      ]
+    },
+    {
+      "id": "writer_nightowl",
+      "name": "Ava Brooks",
+      "role": "Writer (Night Owl)",
+      "chronotype": "night_owl",
+      "wake_time": "10:00",
+      "sleep_time": "02:00",
+      "busy_blocks": [
+        {"days": ["monday","wednesday","friday"], "time": "20:00-23:00"}
+      ]
+    },
+    {
+      "id": "writer_morning",
+      "name": "Liam O'Connor",
+      "role": "Writer (Morning)",
+      "chronotype": "morning_person",
+      "wake_time": "05:30",
+      "sleep_time": "22:00",
+      "busy_blocks": [
+        {"days": ["tuesday","thursday"], "time": "06:00-09:00"}
+      ]
+    },
+    {
+      "id": "driver_day",
+      "name": "Carlos Mendes",
+      "role": "Driver (Day Shift)",
+      "chronotype": "flexible",
+      "wake_time": "05:00",
+      "sleep_time": "22:00",
+      "busy_blocks": [
+        {"days": ["monday","tuesday","wednesday","thursday","friday"], "time": "07:00-14:00"}
+      ]
+    },
+    {
+      "id": "driver_night",
+      "name": "Nora Patel",
+      "role": "Driver (Night Shift)",
+      "chronotype": "night_owl",
+      "wake_time": "12:00",
+      "sleep_time": "04:00",
+      "busy_blocks": [
+        {"days": ["monday","tuesday","wednesday","thursday","friday"], "time": "22:00-02:00"}
+      ]
+    }
   ]
 }
 

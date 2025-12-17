@@ -48,6 +48,8 @@ uv run python -m tools.run_all_tests --model_provider openai --model gpt-4o
 
 Fallback: use `PYTHONPATH=.` when running the test-runner directly so project imports resolve correctly.
 
+See the full calendar test catalog for all indices and expected outcomes: [calm_bench/envs/calendar/TESTS.md](calm_bench/envs/calendar/TESTS.md)
+
 2) Running a specific task or set of tasks
 
 - The harness supports running specific task indices in code/config; if you prefer command-line selection check your launcher or run wrapper for supported flags. If the `--task_ids` flag is not exposed by your runner, run the `main.py` or use the launcher to set `task_ids` in the run configuration programmatically.

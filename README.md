@@ -136,7 +136,9 @@ uv run python -m tools.run_all_tests --model_provider openai --model gpt-4o
 PYTHONPATH=. python tools/run_all_tests.py --model_provider openai --model gpt-4o
 # PowerShell:
 # $env:PYTHONPATH = "."; python tools/run_all_tests.py --model_provider openai --model gpt-4o
-```
+`
+See the full calendar test catalog for indices and expectations: [calm_bench/envs/calendar/TESTS.md](calm_bench/envs/calendar/TESTS.md)
+
 Adjust `--task_split` (`test`, `train`, `dev`) and `--task_ids` to run specific tasks. See `calm_bench/run.py` for the CLI and supported arguments.
 
 ---

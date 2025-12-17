@@ -121,6 +121,170 @@ TASKS_TEST = [
             "07:30 to 08:30"
         ],
     ),
+    # Additional diverse tests to increase coverage
+    Task(
+        user_id="professor_morning",
+        instruction="Schedule a 30-minute student meeting on Thursday morning before the lecture.",
+        actions=[
+            Action(name="get_free_slots", kwargs={"user_id": "professor_morning", "day_of_week": "thursday", "min_duration_minutes": 30}),
+            Action(name="add_event", kwargs={
+                "user_id": "professor_morning",
+                "day_of_week": "thursday",
+                "start_time": "08:30",
+                "end_time": "09:00",
+                "location": "Office",
+                "priority": "medium",
+                "is_flexible": True
+            }),
+            Action(name="get_calendar", kwargs={"user_id": "professor_morning"})
+        ],
+        outputs=["08:30 to 09:00"],
+    ),
+    Task(
+        user_id="professor_evening",
+        instruction="Attempt to schedule a 60-minute guest talk at 18:30 on Thursday evening (conflicts with seminar).",
+        actions=[
+            Action(name="get_venue_hours", kwargs={"venue_id": "library", "day": "thursday"}),
+            Action(name="get_free_slots", kwargs={"user_id": "professor_evening", "day_of_week": "thursday", "min_duration_minutes": 60}),
+            Action(name="add_event", kwargs={
+                "user_id": "professor_evening",
+                "day_of_week": "thursday",
+                "start_time": "18:30",
+                "end_time": "19:30",
+                "location": "Seminar Room",
+                "priority": "high",
+                "is_flexible": False
+            }),
+            Action(name="get_calendar", kwargs={"user_id": "professor_evening"})
+        ],
+        outputs=["cannot schedule"],
+    ),
+    Task(
+        user_id="corporate_remote",
+        instruction="Find a 90-minute deep-focus block for Dana during the afternoon and schedule it.",
+        actions=[
+            Action(name="get_free_slots", kwargs={"user_id": "corporate_remote", "day_of_week": "thursday", "min_duration_minutes": 90}),
+            Action(name="add_event", kwargs={
+                "user_id": "corporate_remote",
+                "day_of_week": "thursday",
+                "start_time": "15:00",
+                "end_time": "16:30",
+                "location": "Home Office",
+                "priority": "medium",
+                "is_flexible": True
+            }),
+            Action(name="get_calendar", kwargs={"user_id": "corporate_remote"})
+        ],
+        outputs=["15:00 to 16:30"],
+    ),
+    Task(
+        user_id="corporate_onsite",
+        instruction="Schedule a 60-minute client call at 10:30 on Thursday (should conflict with Team Sync).",
+        actions=[
+            Action(name="get_free_slots", kwargs={"user_id": "corporate_onsite", "day_of_week": "thursday", "min_duration_minutes": 60}),
+            Action(name="add_event", kwargs={
+                "user_id": "corporate_onsite",
+                "day_of_week": "thursday",
+                "start_time": "10:30",
+                "end_time": "11:30",
+                "location": "Conference Room B",
+                "priority": "high",
+                "is_flexible": False
+            }),
+            Action(name="get_calendar", kwargs={"user_id": "corporate_onsite"})
+        ],
+        outputs=["cannot schedule"],
+    ),
+    Task(
+        user_id="pet_owner_dog",
+        instruction="Book a 45-minute grooming slot for the dog on Thursday morning after the usual walk.",
+        actions=[
+            Action(name="get_free_slots", kwargs={"user_id": "pet_owner_dog", "day_of_week": "thursday", "min_duration_minutes": 45}),
+            Action(name="add_event", kwargs={
+                "user_id": "pet_owner_dog",
+                "day_of_week": "thursday",
+                "start_time": "09:15",
+                "end_time": "10:00",
+                "location": "Pet Groomers",
+                "priority": "medium",
+                "is_flexible": True
+            }),
+            Action(name="get_calendar", kwargs={"user_id": "pet_owner_dog"})
+        ],
+        outputs=["09:15 to 10:00"],
+    ),
+    Task(
+        user_id="pet_owner_cat",
+        instruction="Schedule a 30-minute check-in call at 08:00 on Thursday (should respect evening chronotype).",
+        actions=[
+            Action(name="get_free_slots", kwargs={"user_id": "pet_owner_cat", "day_of_week": "thursday", "min_duration_minutes": 30}),
+            Action(name="add_event", kwargs={
+                "user_id": "pet_owner_cat",
+                "day_of_week": "thursday",
+                "start_time": "08:00",
+                "end_time": "08:30",
+                "location": "Phone",
+                "priority": "low",
+                "is_flexible": True
+            }),
+            Action(name="get_calendar", kwargs={"user_id": "pet_owner_cat"})
+        ],
+        outputs=["cannot schedule"],
+    ),
+    Task(
+        user_id="writer_nightowl",
+        instruction="Try to schedule a 60-minute morning draft session at 07:00 (chronotype mismatch expected).",
+        actions=[
+            Action(name="get_free_slots", kwargs={"user_id": "writer_nightowl", "day_of_week": "thursday", "min_duration_minutes": 60}),
+            Action(name="add_event", kwargs={
+                "user_id": "writer_nightowl",
+                "day_of_week": "thursday",
+                "start_time": "07:00",
+                "end_time": "08:00",
+                "location": "Home",
+                "priority": "low",
+                "is_flexible": False
+            }),
+            Action(name="get_calendar", kwargs={"user_id": "writer_nightowl"})
+        ],
+        outputs=["cannot schedule"],
+    ),
+    Task(
+        user_id="driver_day",
+        instruction="Attempt to add a 30-minute personal errand at 08:30 (during day shift).",
+        actions=[
+            Action(name="get_free_slots", kwargs={"user_id": "driver_day", "day_of_week": "thursday", "min_duration_minutes": 30}),
+            Action(name="add_event", kwargs={
+                "user_id": "driver_day",
+                "day_of_week": "thursday",
+                "start_time": "08:30",
+                "end_time": "09:00",
+                "location": "Errand",
+                "priority": "medium",
+                "is_flexible": False
+            }),
+            Action(name="get_calendar", kwargs={"user_id": "driver_day"})
+        ],
+        outputs=["cannot schedule"],
+    ),
+    Task(
+        user_id="driver_night",
+        instruction="Schedule a 30-minute check-in at 23:00 during the night shift (should conflict).",
+        actions=[
+            Action(name="get_free_slots", kwargs={"user_id": "driver_night", "day_of_week": "thursday", "min_duration_minutes": 30}),
+            Action(name="add_event", kwargs={
+                "user_id": "driver_night",
+                "day_of_week": "thursday",
+                "start_time": "23:00",
+                "end_time": "23:30",
+                "location": "Phone",
+                "priority": "low",
+                "is_flexible": False
+            }),
+            Action(name="get_calendar", kwargs={"user_id": "driver_night"})
+        ],
+        outputs=["cannot schedule"],
+    ),
     Task(
         user_id="busy_person",
         instruction=(

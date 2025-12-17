@@ -48,4 +48,55 @@
       }
     ]
   }
+  ,
+  "professor_morning": {
+    "events": [
+      {"title": "Lecture: CS101", "start": "2023-10-05T09:00:00", "end": "2023-10-05T10:30:00", "location": "Lecture Hall 2"}
+    ]
+  },
+  "professor_evening": {
+    "events": [
+      {"title": "Evening Seminar", "start": "2023-10-05T18:00:00", "end": "2023-10-05T19:30:00", "location": "Seminar Room"}
+    ]
+  },
+  "corporate_remote": {
+    "events": [
+      {"title": "All-Hands Call", "start": "2023-10-05T13:00:00", "end": "2023-10-05T14:00:00", "location": "Zoom"}
+    ]
+  },
+  "corporate_onsite": {
+    "events": [
+      {"title": "Team Sync", "start": "2023-10-05T10:00:00", "end": "2023-10-05T11:00:00", "location": "Conference Room B"}
+    ]
+  },
+  "pet_owner_dog": {
+    "events": [
+      {"title": "Dog Walk", "start": "2023-10-05T08:30:00", "end": "2023-10-05T09:00:00", "location": "Park"}
+    ]
+  },
+  "pet_owner_cat": {
+    "events": [
+      {"title": "Vet Appointment", "start": "2023-10-05T19:00:00", "end": "2023-10-05T19:30:00", "location": "Vet Clinic"}
+    ]
+  },
+  "writer_nightowl": {
+    "events": [
+      {"title": "Writing Session", "start": "2023-10-05T21:00:00", "end": "2023-10-05T23:30:00", "location": "Home"}
+    ]
+  },
+  "writer_morning": {
+    "events": [
+      {"title": "Morning Draft", "start": "2023-10-05T06:00:00", "end": "2023-10-05T08:00:00", "location": "Cafe"}
+    ]
+  },
+  "driver_day": {
+    "events": [
+      {"title": "Day Shift", "start": "2023-10-05T07:00:00", "end": "2023-10-05T14:00:00", "location": "On Route"}
+    ]
+  },
+  "driver_night": {
+    "events": [
+      {"title": "Night Shift", "start": "2023-10-05T22:00:00", "end": "2023-10-06T02:00:00", "location": "On Route"}
+    ]
+  }
 }
