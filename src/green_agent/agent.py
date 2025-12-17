@@ -28,7 +28,6 @@ def load_agent_card_toml(agent_name):
 
 
 async def ask_agent_to_solve(white_agent_url, env, task_index, max_num_steps=30):
-    # migrated from https://github.com/sierra-research/tau-bench/blob/4754e6b406507dbcbce8e8b3855dcf80aaec18ac/tau_bench/agents/tool_calling_agent.py#L27
     total_cost = 0.0
     env_reset_res = env.reset(task_index=task_index)
     obs = env_reset_res.observation
@@ -133,7 +132,7 @@ User message:
     )
 
 
-class TauGreenAgentExecutor(AgentExecutor):
+class CalmGreenAgentExecutor(AgentExecutor):
     def __init__(self):
         pass
 
@@ -147,7 +146,6 @@ class TauGreenAgentExecutor(AgentExecutor):
         env_config = json.loads(env_config_str)
 
         # set up the environment
-        # migrate from https://github.com/sierra-research/tau-bench/blob/4754e6b406507dbcbce8e8b3855dcf80aaec18ac/tau_bench/run.py#L20
         print("Green agent: Setting up the environment...")
         assert len(env_config["task_ids"]) == 1, (
             "Only single task supported for demo purpose"
@@ -193,14 +191,14 @@ class TauGreenAgentExecutor(AgentExecutor):
         raise NotImplementedError
 
 
-def start_green_agent(agent_name="tau_green_agent", host="localhost", port=9001):
+def start_green_agent(agent_name="calm_green_agent", host="localhost", port=9001):
     print("Starting green agent...")
     agent_card_dict = load_agent_card_toml(agent_name)
     url = f"http://{host}:{port}"
     agent_card_dict["url"] = url  # complete all required card fields
 
     request_handler = DefaultRequestHandler(
-        agent_executor=TauGreenAgentExecutor(),
+        agent_executor=CalmGreenAgentExecutor(),
         task_store=InMemoryTaskStore(),
     )
 

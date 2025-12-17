@@ -1,6 +1,6 @@
-# Agentify Example: Tau-Bench
+# Agentify Example: CALM-Bench
 
-Example code for agentifying Tau-Bench using A2A and MCP standards.
+Example code for agentifying CALM-Bench using A2A and MCP standards.
 
 ## Project Structure
 

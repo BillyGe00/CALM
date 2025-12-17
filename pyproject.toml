@@ -1,7 +1,7 @@
 [project]
-name = "agentify-example-tau-bench"
-version = "0.1.0"
-description = "Example code of agentifying tau-bench for the blog `Agentify the Agent Assessment`."
+name = "calm-bench"
+version = "0.0.1"
+description = "Example code of agentifying calm-bench."
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
