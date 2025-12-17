@@ -1,6 +1,7 @@
 """Green agent implementation - manages assessment and evaluation."""
 
 import uvicorn
+import os
 import tomllib
 import dotenv
 import json
@@ -181,6 +182,22 @@ class CalmGreenAgentExecutor(AgentExecutor):
         result_emoji = "✅" if result_bool else "❌"
 
         print("Green agent: Evaluation complete.")
+        # Save evaluation summary to results/ for later inspection
+        try:
+            if not os.path.exists("results"):
+                os.makedirs("results")
+            summary_path = f"results/eval_summary_green_{int(time.time())}.json"
+            with open(summary_path, "w") as sf:
+                json.dump({
+                    "task_index": task_index,
+                    "metrics": metrics,
+                    "success": result_bool,
+                    "result": res.model_dump() if hasattr(res, "model_dump") else None,
+                }, sf, indent=2)
+            print(f"Saved evaluation summary to {summary_path}")
+        except Exception as e:
+            print(f"Could not write evaluation summary: {e}")
+
         await event_queue.enqueue_event(
             new_agent_text_message(
                 f"Finished. White agent success: {result_emoji}\nMetrics: {metrics}\n"

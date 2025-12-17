@@ -137,4 +137,74 @@ TASKS_TEST = [
             "cannot schedule",
         ],
     ),
+    Task(
+        user_id="busy_person",
+        instruction=(
+            "Intentionally attempt to schedule a 30-minute block during busy_person's sleep window (00:30-01:00 on Thursday)."
+            " This should violate persona sleep constraints — expect the agent to refuse or report a conflict."
+        ),
+        actions=[
+            Action(name="get_free_slots", kwargs={"user_id": "busy_person", "day_of_week": "thursday", "min_duration_minutes": 30}),
+            Action(name="add_event", kwargs={
+                "user_id": "busy_person",
+                "day_of_week": "thursday",
+                "start_time": "00:30",
+                "end_time": "01:00",
+                "location": "home",
+                "priority": "low",
+                "is_flexible": False
+            }),
+            Action(name="get_calendar", kwargs={"user_id": "busy_person"})
+        ],
+        outputs=[
+            "cannot schedule",
+        ],
+    ),
+    Task(
+        user_id="busy_person",
+        instruction=(
+            "Attempt to schedule a 60-minute meeting at 10:30 on Thursday (during working hours 09:00-17:00)."
+            " This should conflict with existing busy blocks — expect the agent to refuse or report a conflict."
+        ),
+        actions=[
+            Action(name="get_free_slots", kwargs={"user_id": "busy_person", "day_of_week": "thursday", "min_duration_minutes": 60}),
+            Action(name="add_event", kwargs={
+                "user_id": "busy_person",
+                "day_of_week": "thursday",
+                "start_time": "10:30",
+                "end_time": "11:30",
+                "location": "office",
+                "priority": "high",
+                "is_flexible": False
+            }),
+            Action(name="get_calendar", kwargs={"user_id": "busy_person"})
+        ],
+        outputs=[
+            "cannot schedule",
+        ],
+    ),
+    Task(
+        user_id="fitness_enthusiast",
+        instruction=(
+            "Try to schedule a 90-minute gym session at 02:00 on Monday when the gym is closed."
+            " Expect the agent to check venue hours and refuse or propose an alternative."
+        ),
+        actions=[
+            Action(name="get_venue_hours", kwargs={"venue_id": "gym", "day": "monday"}),
+            Action(name="get_free_slots", kwargs={"user_id": "fitness_enthusiast", "day_of_week": "monday", "min_duration_minutes": 90}),
+            Action(name="add_event", kwargs={
+                "user_id": "fitness_enthusiast",
+                "day_of_week": "monday",
+                "start_time": "02:00",
+                "end_time": "03:30",
+                "location": "gym",
+                "priority": "medium",
+                "is_flexible": False
+            }),
+            Action(name="get_calendar", kwargs={"user_id": "fitness_enthusiast"})
+        ],
+        outputs=[
+            "cannot schedule",
+        ],
+    ),
 ]

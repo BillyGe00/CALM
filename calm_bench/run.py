@@ -201,3 +201,85 @@ def display_metrics(results: List[EnvRunResult]) -> None:
     print("📈 Pass^k")
     for k, pass_hat_k in pass_hat_ks.items():
         print(f"  k={k}: {pass_hat_k}")
+    # --- Aggregate detailed reward info (if available) ---
+    per_task_details = {}
+    dims = [
+        "constraint_satisfaction",
+        "persona_alignment",
+        "replanning_robustness",
+        "external_feasibility",
+    ]
+    dim_values = {d: [] for d in dims}
+    venue_violations = {}
+    conflict_counts = 0
+
+    for r in results:
+        info = r.info if isinstance(r.info, dict) else {}
+        reward_info = info.get("reward_info") if isinstance(info, dict) else None
+        if reward_info and isinstance(reward_info, dict):
+            # reward_info expected shape: {"reward": float, "info": {dim scores...}, "actions": [...]}
+            ri = reward_info
+            ri_inner = ri.get("info") if isinstance(ri.get("info"), dict) else ri.get("info")
+            # support both nested 'info' dict (CalendarRewardInfo) or older shapes
+            scores = {}
+            if isinstance(ri_inner, dict):
+                for d in dims:
+                    v = ri_inner.get(d)
+                    if v is not None:
+                        dim_values[d].append(v)
+                        scores[d] = v
+                # collect venue violations if present
+                details = ri_inner.get("details") if isinstance(ri_inner.get("details"), dict) else {}
+                ev = details.get("external_feasibility", {}) if isinstance(details, dict) else {}
+                vv = ev.get("venue_violations") if isinstance(ev, dict) else None
+                if vv and isinstance(vv, list):
+                    for item in vv:
+                        venue = item.get("venue") if isinstance(item, dict) else None
+                        if venue:
+                            venue_violations[venue] = venue_violations.get(venue, 0) + 1
+                # collect conflict info
+                cs_details = details.get("constraint_satisfaction", {}) if isinstance(details, dict) else {}
+                conflicts = cs_details.get("conflicts") if isinstance(cs_details, dict) else None
+                if conflicts and isinstance(conflicts, list):
+                    conflict_counts += len(conflicts)
+            per_task_details[r.task_id] = {"reward": ri.get("reward"), "scores": scores, "raw": ri}
+
+    aggregates = {}
+    for d in dims:
+        vals = dim_values.get(d, [])
+        if vals:
+            aggregates[d] = {"mean": sum(vals) / len(vals), "count": len(vals)}
+        else:
+            aggregates[d] = {"mean": None, "count": 0}
+
+    eval_summary = {
+        "average_reward": avg_reward,
+        "num_tasks": len(results),
+        "per_dimension": aggregates,
+        "venue_violations": venue_violations,
+        "total_conflicts_reported": conflict_counts,
+        "per_task": per_task_details,
+    }
+
+    # write summary to disk
+    try:
+        summary_path = f"results/eval_summary_{datetime.now().strftime('%m%d%H%M%S')}.json"
+        if not os.path.exists("results"):
+            os.makedirs("results")
+        with open(summary_path, "w") as sf:
+            json.dump(eval_summary, sf, indent=2)
+        print(f"📝 Evaluation summary saved to {summary_path}")
+    except Exception as e:
+        print(f"Could not write evaluation summary: {e}")
+
+    # print compact table
+    print("\n=== Per-dimension averages ===")
+    for d in dims:
+        m = aggregates[d]["mean"]
+        cnt = aggregates[d]["count"]
+        print(f" - {d}: mean={m} (n={cnt})")
+    if venue_violations:
+        print("\nTop venue violations:")
+        for v, c in sorted(venue_violations.items(), key=lambda x: -x[1])[:10]:
+            print(f"  {v}: {c}")
+    print(f"\nTotal conflicts reported in details: {conflict_counts}")
