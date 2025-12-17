@@ -20,7 +20,7 @@
     }
   },
   "per_task": {
-    "21": {
+    "39": {
       "reward": 1.0,
       "scores": {
         "constraint_satisfaction": 1.0,
@@ -60,22 +60,41 @@
         },
         "actions": [
           {
+            "name": "get_persona",
+            "kwargs": {
+              "persona_id": "night_owl"
+            }
+          },
+          {
             "name": "get_free_slots",
             "kwargs": {
-              "user_id": "default_user",
-              "day_of_week": "thursday",
-              "min_duration_minutes": 30
+              "user_id": "general",
+              "day_of_week": "friday"
+            }
+          },
+          {
+            "name": "get_free_slots",
+            "kwargs": {
+              "user_id": "default",
+              "day_of_week": "friday"
+            }
+          },
+          {
+            "name": "get_free_slots",
+            "kwargs": {
+              "user_id": "general",
+              "day_of_week": "friday"
             }
           },
           {
             "name": "add_event",
             "kwargs": {
-              "user_id": "default_user",
-              "day_of_week": "thursday",
-              "start_time": "07:45",
-              "end_time": "08:15",
+              "user_id": "general",
+              "day_of_week": "friday",
+              "start_time": "23:30",
+              "end_time": "01:00",
               "priority": "medium",
-              "is_flexible": true
+              "is_flexible": false
             }
           }
         ]
