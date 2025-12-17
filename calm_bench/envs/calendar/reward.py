@@ -174,20 +174,26 @@ def check_constraint_satisfaction(
             continue  # Only check newly added events
         
         event_start = time_to_minutes(slot.get("start_time", "00:00"))
-        event_end = time_to_minutes(slot.get("end_time", "00:00"))
         
-        # Check if event is during sleep hours (after sleep_time or before wake_time)
-        if event_start >= sleep_minutes or event_end <= wake_minutes:
-            if event_start >= sleep_minutes:
-                score -= 0.2
-                details["sleep_violations"].append(
-                    f"Event at {slot.get('start_time')} is after sleep time {sleep_time}"
-                )
-            if event_start < wake_minutes:
-                score -= 0.2
-                details["sleep_violations"].append(
-                    f"Event at {slot.get('start_time')} is before wake time {wake_time}"
-                )
+        # Check if event is during sleep hours
+        # Sleep period can be:
+        # - Same day: sleep_time < wake_time (e.g., 01:00-08:00 for night owl)
+        # - Cross midnight: sleep_time > wake_time (e.g., 22:00-06:00 for early bird)
+        is_during_sleep = False
+        if sleep_minutes < wake_minutes:
+            # Sleep period is within the same day (e.g., 01:00-08:00)
+            # Event violates if it starts during sleep period
+            is_during_sleep = sleep_minutes <= event_start < wake_minutes
+        else:
+            # Sleep period crosses midnight (e.g., 22:00-06:00)
+            # Event violates if it starts after sleep_time OR before wake_time
+            is_during_sleep = event_start >= sleep_minutes or event_start < wake_minutes
+        
+        if is_during_sleep:
+            score -= 0.2
+            details["sleep_violations"].append(
+                f"Event at {slot.get('start_time')} is during sleep hours ({sleep_time}-{wake_time})"
+            )
     
     return max(0.0, score), details
 
