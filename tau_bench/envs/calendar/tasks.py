@@ -1,8 +1,8 @@
 """Test tasks for calendar domain evaluation."""
 
 from typing import List, Optional
-from envs.types import Task, Action
-from envs.calendar.task_generator import generate_task, generate_task_batch
+from tau_bench.types import Task, Action
+from tau_bench.envs.calendar.task_generator import generate_task, generate_task_batch
 
 
 # ============================================================================

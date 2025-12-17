@@ -1,13 +1,13 @@
 """Calendar domain tools."""
 
-from envs.calendar.tools.get_persona import GetPersona
-from envs.calendar.tools.get_venue_hours import GetVenueHours
-from envs.calendar.tools.get_calendar import GetCalendar
-from envs.calendar.tools.get_busy_slots import GetBusySlots
-from envs.calendar.tools.get_free_slots import GetFreeSlots
-from envs.calendar.tools.add_event import AddEvent
-from envs.calendar.tools.remove_event import RemoveEvent
-from envs.calendar.tools.update_event import UpdateEvent
+from tau_bench.envs.calendar.tools.get_persona import GetPersona
+from tau_bench.envs.calendar.tools.get_venue_hours import GetVenueHours
+from tau_bench.envs.calendar.tools.get_calendar import GetCalendar
+from tau_bench.envs.calendar.tools.get_busy_slots import GetBusySlots
+from tau_bench.envs.calendar.tools.get_free_slots import GetFreeSlots
+from tau_bench.envs.calendar.tools.add_event import AddEvent
+from tau_bench.envs.calendar.tools.remove_event import RemoveEvent
+from tau_bench.envs.calendar.tools.update_event import UpdateEvent
 
 ALL_TOOLS = [
     GetPersona,

@@ -30,9 +30,24 @@ class RewardActionInfo(BaseModel):
 
 
 class RewardResult(BaseModel):
+
     reward: float
-    info: Union[RewardOutputInfo, RewardActionInfo]
+    info: Union[RewardOutputInfo, RewardActionInfo, 'CalendarRewardInfo']
     actions: List[Action]
+
+
+# CalendarRewardInfo for calendar environment
+
+class CalendarRewardInfo(BaseModel):
+    constraint_satisfaction: float = 1.0
+    persona_alignment: float = 1.0
+    balance_index: float = 1.0
+    replanning_robustness: float = 1.0
+    external_feasibility: float = 1.0
+    weights: Dict[str, float] = {}
+    details: Dict[str, Any] = {}
+
+
 
 
 class SolveResult(BaseModel):

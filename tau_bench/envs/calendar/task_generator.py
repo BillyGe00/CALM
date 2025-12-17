@@ -11,8 +11,8 @@ import random
 from typing import List, Dict, Any, Optional
 from datetime import datetime, timedelta
 
-from envs.types import Task, Action
-from envs.calendar.data import load_data
+from tau_bench.types import Task, Action
+from tau_bench.envs.calendar.data import load_data
 
 
 # Day name mapping

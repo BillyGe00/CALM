@@ -2,7 +2,7 @@
 
 import json
 from typing import Any, Dict, List
-from envs.tool import Tool
+from tau_bench.envs.tool import Tool
 
 
 def time_to_minutes(t: str) -> int:

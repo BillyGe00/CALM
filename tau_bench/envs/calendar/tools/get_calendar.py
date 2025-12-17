@@ -2,7 +2,7 @@
 
 import json
 from typing import Any, Dict, Optional
-from envs.tool import Tool
+from tau_bench.envs.tool import Tool
 
 
 class GetCalendar(Tool):
@@ -32,26 +32,58 @@ class GetCalendar(Tool):
         calendars = data.get("calendars", {})
         
         if user_id not in calendars:
-            # Try to find by persona id
-            user_calendar = calendars.get(user_id, {"events": []})
-        else:
-            user_calendar = calendars[user_id]
+            return json.dumps({
+                "error": f"No calendar found for user_id '{user_id}'",
+                "user_id": user_id,
+                "events": [],
+                "count": 0
+            }, indent=2)
         
+        user_calendar = calendars[user_id]
         events = user_calendar.get("events", [])
         
         # Filter by date if specified
         if date:
-            events = [e for e in events if e.get("date") == date]
+            def event_matches_date(e):
+                # Prefer explicit 'date' field, else extract from 'start'
+                if "date" in e:
+                    return e["date"] == date
+                if "start" in e and isinstance(e["start"], str) and len(e["start"]) >= 10:
+                    return e["start"].split("T")[0] == date
+                return False
+            events = [e for e in events if event_matches_date(e)]
         elif start_date and end_date:
-            events = [
-                e for e in events 
-                if start_date <= e.get("date", "") <= end_date
-            ]
+            def event_in_range(e):
+                # Prefer explicit 'date' field, else extract from 'start'
+                if "date" in e:
+                    d = e["date"]
+                elif "start" in e and isinstance(e["start"], str) and len(e["start"]) >= 10:
+                    d = e["start"].split("T")[0]
+                else:
+                    return False
+                return start_date <= d <= end_date
+            events = [e for e in events if event_in_range(e)]
         
+        # Format a user-friendly summary if events are found
+        if events:
+            event_lines = []
+            for idx, e in enumerate(events, 1):
+                title = e.get("title", "(No Title)")
+                start = e.get("start", "?")
+                end = e.get("end", "?")
+                # Extract just the time portion, drop seconds
+                start_time = start.split("T")[1][:5] if "T" in start else start[:5]
+                end_time = end.split("T")[1][:5] if "T" in end else end[:5]
+                location = e.get("location", "(No Location)")
+                event_lines.append(f"{idx}. **{title}**\n   - Time: {start_time} - {end_time}\n   - Location: {location}")
+            summary = f"Here is the list of today's events for {user_id}:\n\n" + "\n\n".join(event_lines)
+        else:
+            summary = f"No events found for {user_id} on this date."
         return json.dumps({
             "user_id": user_id,
             "events": events,
-            "count": len(events)
+            "count": len(events),
+            "summary": summary
         }, indent=2)
 
     @staticmethod

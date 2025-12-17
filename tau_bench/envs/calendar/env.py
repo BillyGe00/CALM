@@ -2,20 +2,20 @@
 
 from typing import Optional, Union, List, Dict, Any
 
-from envs.base import Env
-from envs.user import UserStrategy
-from envs.types import (
+from tau_bench.envs.base import Env
+from tau_bench.envs.user import UserStrategy
+from tau_bench.types import (
     Action,
     RewardResult,
     CalendarRewardInfo,
     RESPOND_ACTION_NAME,
 )
-from envs.calendar.data import load_data
-from envs.calendar.tools import ALL_TOOLS
-from envs.calendar.wiki import WIKI
-from envs.calendar.rules import RULES
-from envs.calendar.tasks import get_tasks
-from envs.calendar.reward import calculate_calendar_reward
+from tau_bench.envs.calendar.data import load_data
+from tau_bench.envs.calendar.tools import ALL_TOOLS
+from tau_bench.envs.calendar.wiki import WIKI
+from tau_bench.envs.calendar.rules import RULES
+from tau_bench.envs.calendar.tasks import get_tasks
+from tau_bench.envs.calendar.reward import calculate_calendar_reward
 
 
 class MockCalendarDomainEnv(Env):

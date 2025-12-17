@@ -40,5 +40,19 @@
         {"days": ["saturday"], "time": "10:00-12:00"}
       ]
     }
+    ,
+    {
+      "id": "busy_person",
+      "name": "Jordan Lee",
+      "role": "Senior Project Manager",
+      "chronotype": "night_owl",
+      "wake_time": "08:00",
+      "sleep_time": "01:00",
+      "busy_blocks": [
+        {"days": ["monday", "tuesday", "wednesday", "thursday", "friday"], "time": "09:00-17:00"},
+        {"days": ["monday", "wednesday"], "time": "18:00-20:00"},
+        {"days": ["friday"], "time": "15:00-17:00"}
+      ]
+    }
   ]
 }

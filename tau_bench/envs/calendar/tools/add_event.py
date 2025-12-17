@@ -3,7 +3,7 @@
 import json
 import uuid
 from typing import Any, Dict, Optional
-from envs.tool import Tool
+from tau_bench.envs.tool import Tool
 
 
 DAYS_MAP = {
