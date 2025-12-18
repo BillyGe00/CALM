@@ -699,4 +699,34 @@ TASKS_TEST = [
         ],
         outputs=["23:30 to 01:00"],
     ),
+    # --- User-added tests ---
+    Task(
+        user_id="corporate_onsite",
+        instruction=(
+            "Schedule two back-to-back short meetings for corporate_onsite on Thursday with a 15-minute travel buffer:"
+            " 09:30-10:00 at Building A, then 10:15-10:45 at Offsite Center. Check venue hours and refuse if travel makes this infeasible."
+        ),
+        actions=[
+            Action(name="get_venue_hours", kwargs={"venue_id": "Building A", "day": "thursday"}),
+            Action(name="get_venue_hours", kwargs={"venue_id": "Offsite Center", "day": "thursday"}),
+            Action(name="get_free_slots", kwargs={"user_id": "corporate_onsite", "day_of_week": "thursday", "min_duration_minutes": 30}),
+            Action(name="add_event", kwargs={"user_id": "corporate_onsite", "day_of_week": "thursday", "start_time": "09:30", "end_time": "10:00", "location": "Building A", "priority": "high", "is_flexible": False}),
+            Action(name="add_event", kwargs={"user_id": "corporate_onsite", "day_of_week": "thursday", "start_time": "10:15", "end_time": "10:45", "location": "Offsite Center", "priority": "high", "is_flexible": False}),
+            Action(name="get_calendar", kwargs={"user_id": "corporate_onsite"}),
+        ],
+        outputs=["09:30 to 10:00, 10:15 to 10:45"],
+    ),
+    Task(
+        user_id="fitness_enthusiast",
+        instruction=(
+            "Request an 8-hour focus block on Monday. If a single 8-hour continuous slot is not available, propose splitting it into multiple smaller blocks totaling 8 hours or propose reasonable alternatives."
+        ),
+        actions=[
+            Action(name="get_free_slots", kwargs={"user_id": "fitness_enthusiast", "day_of_week": "monday", "min_duration_minutes": 480}),
+            Action(name="get_calendar", kwargs={"user_id": "fitness_enthusiast"}),
+            Action(name="add_event", kwargs={"user_id": "fitness_enthusiast", "day_of_week": "monday", "start_time": "08:00", "end_time": "16:00", "location": "Home", "priority": "medium", "is_flexible": False}),
+            Action(name="get_calendar", kwargs={"user_id": "fitness_enthusiast"}),
+        ],
+        outputs=["cannot schedule"],
+    ),
 ]

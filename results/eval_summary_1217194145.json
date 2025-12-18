@@ -1,0 +1,121 @@
+{
+  "average_reward": 1.0,
+  "num_tasks": 1,
+  "per_dimension": {
+    "constraint_satisfaction": {
+      "mean": 1.0,
+      "count": 1
+    },
+    "persona_alignment": {
+      "mean": 1.0,
+      "count": 1
+    },
+    "replanning_robustness": {
+      "mean": 1.0,
+      "count": 1
+    },
+    "external_feasibility": {
+      "mean": 1.0,
+      "count": 1
+    }
+  },
+  "venue_violations": {},
+  "total_conflicts_reported": 0,
+  "per_task": {
+    "14": {
+      "reward": 1.0,
+      "scores": {
+        "constraint_satisfaction": 1.0,
+        "persona_alignment": 1.0,
+        "replanning_robustness": 1.0,
+        "external_feasibility": 1.0
+      },
+      "raw": {
+        "reward": 1.0,
+        "info": {
+          "constraint_satisfaction": 1.0,
+          "persona_alignment": 1.0,
+          "balance_index": 1.0,
+          "replanning_robustness": 1.0,
+          "external_feasibility": 1.0,
+          "weights": {
+            "constraint_satisfaction": 0.35,
+            "persona_alignment": 0.3,
+            "replanning_robustness": 0.2,
+            "external_feasibility": 0.15
+          },
+          "details": {
+            "constraint_satisfaction": {
+              "conflicts": [],
+              "sleep_violations": []
+            },
+            "persona_alignment": {
+              "note": "No new events to check"
+            },
+            "replanning_robustness": {
+              "note": "No perturbation scenario"
+            },
+            "external_feasibility": {
+              "note": "No events with venue to check"
+            }
+          }
+        },
+        "actions": [
+          {
+            "name": "get_persona",
+            "kwargs": {
+              "persona_id": "driver_night"
+            }
+          },
+          {
+            "name": "get_calendar",
+            "kwargs": {
+              "user_id": "driver_night",
+              "date": "2022-12-07"
+            }
+          },
+          {
+            "name": "add_event",
+            "kwargs": {
+              "user_id": "driver_night",
+              "day_of_week": "wednesday",
+              "start_time": "23:00",
+              "end_time": "23:30",
+              "priority": "high",
+              "is_flexible": false
+            }
+          }
+        ]
+      },
+      "process_scores": {
+        "tool_call_count": 3,
+        "tool_names": [
+          "get_persona",
+          "get_calendar",
+          "add_event"
+        ],
+        "model_response_count": 7,
+        "env_response_count": 7,
+        "tool_call_success_rate": 1.0,
+        "rounds": 7,
+        "expected_rounds": 6,
+        "rounds_efficiency": 0.8571428571428571,
+        "constraint_ok_fraction": null,
+        "llm": {
+          "constraint_satisfaction": 0.8,
+          "persona_alignment": 0.9,
+          "replanning_robustness": 0.7,
+          "external_feasibility": 0.6,
+          "note": "The agent successfully scheduled the check-in but did not initially consider the persona's busy schedule. It later clarified the conflict, showing good persona alignment. Replanning was suggested but not executed. External feasibility is moderate due to potential work conflict."
+        }
+      }
+    }
+  },
+  "pass_hat_ks": {
+    "1": 1.0
+  },
+  "process": {
+    "tool_call_success_rate_mean": 1.0,
+    "rounds_mean": 7.0
+  }
+}

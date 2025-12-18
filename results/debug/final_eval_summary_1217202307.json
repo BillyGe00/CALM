@@ -1,0 +1,26 @@
+{
+  "average_reward": 0.0,
+  "num_tasks": 1,
+  "per_dimension": {
+    "constraint_satisfaction": {
+      "mean": null,
+      "count": 0
+    },
+    "persona_alignment": {
+      "mean": null,
+      "count": 0
+    },
+    "replanning_robustness": {
+      "mean": null,
+      "count": 0
+    },
+    "external_feasibility": {
+      "mean": null,
+      "count": 0
+    }
+  },
+  "per_task": {},
+  "pass_hat_ks": {
+    "1": 0.0
+  }
+}

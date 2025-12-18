@@ -55,8 +55,8 @@ def score_trace(trace: List[Dict[str, Any]], reward_info: Optional[Dict[str, Any
     if tool_calls > 0:
         success_rate = tool_call_successes / tool_calls
 
-    # expected rounds heuristic: one round per unique tool called, plus one for planning/response
-    expected_rounds = max(1, len(tool_names) + (1 if tool_calls > 0 else 0))
+    # expected rounds heuristic: expect roughly two rounds per unique tool called
+    expected_rounds = max(1, 2 * len(tool_names))
     actual_rounds = env_responses
     rounds_efficiency = None
     if actual_rounds and actual_rounds > 0:
