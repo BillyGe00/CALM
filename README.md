@@ -1,4 +1,4 @@
-# CALM — Calendar Agent Evaluation Suite
+# CALM — Calendar Agent For Life Management
 
 This repository provides CALM, an evaluation platform for calendar-scheduling agents. It includes an automated benchmark harness, a green evaluator agent that instruments persona-aware and feasibility checks, a white agent interface (system under test), curated data/tasks, and tooling to run reproducible multi-trial evaluations.
 
@@ -181,30 +181,3 @@ Contributions are welcome. Please follow the CONTRIBUTING guidelines in the `doc
 ## Contact
 
 For questions, open an issue or contact the authors of the repository.
-# Agentify Example: CALM-Bench
-
-Example code for agentifying CALM-Bench using A2A and MCP standards.
-
-## Project Structure
-
-```
-src/
-├── green_agent/    # Assessment manager agent
-├── white_agent/    # Target agent being tested
-└── launcher.py     # Evaluation coordinator
-```
-
-## Installation
-
-```bash
-uv sync
-```
-
-## Usage
-
-First, configure `.env` with `OPENAI_API_KEY=...`, then
-
-```bash
-# Launch complete evaluation
-uv run python main.py launch
-```

@@ -34,10 +34,22 @@ class ToolCallingAgent(Agent):
         obs = env_reset_res.observation
         info = env_reset_res.info.model_dump()
         reward = 0.0
-        messages: List[Dict[str, Any]] = [
-            {"role": "system", "content": self.wiki},
-            {"role": "user", "content": obs},
-        ]
+        # Build initial messages; include a short system constraint that
+        # forces the model to always use the task's `user_id` when calling tools
+        task = info.get("task") if isinstance(info, dict) else None
+        user_id = None
+        if task and isinstance(task, dict):
+            user_id = task.get("user_id")
+
+        messages: List[Dict[str, Any]] = [{"role": "system", "content": self.wiki}]
+        if user_id:
+            system_constraint = (
+                "System constraint: When calling tools (e.g., get_calendar, get_free_slots, add_event), "
+                f"always pass the task's user_id value '{user_id}' as the `user_id` argument. "
+                "Do not substitute defaults like 'default_user'."
+            )
+            messages.append({"role": "system", "content": system_constraint})
+        messages.append({"role": "user", "content": obs})
         self.emit_trace("reset", {"observation": obs, "task_index": task_index})
         for _ in range(max_num_steps):
             res = completion(

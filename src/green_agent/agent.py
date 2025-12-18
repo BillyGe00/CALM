@@ -18,6 +18,7 @@ from src.my_util import parse_tags, my_a2a
 # from calm_bench.agents.tool_calling_agent import ToolCallingAgent
 from calm_bench.envs import get_env
 from calm_bench.types import SolveResult, RESPOND_ACTION_NAME, Action
+from calm_bench.eval.process_evaluator import score_trace, llm_score_trace
 
 dotenv.load_dotenv()
 
@@ -34,6 +35,7 @@ async def ask_agent_to_solve(white_agent_url, env, task_index, max_num_steps=30)
     obs = env_reset_res.observation
     info = env_reset_res.info.model_dump()
     reward = 0.0
+    trace: list[dict] = []
 
     # messages = [
     #     {"role": "system", "content": env.wiki},
@@ -100,6 +102,8 @@ User message: {obs}
             "Expecting exactly one text part from the white agent"
         )
         white_text = text_parts[0]
+        # record model response in trace
+        trace.append({"type": "model_response", "payload": {"content": white_text, "context_id": res_result.context_id}})
         print(f"@@@ White agent response:\n{white_text}")
         # parse the action out
         white_tags = parse_tags(white_text)
@@ -108,6 +112,15 @@ User message: {obs}
         action = Action(**action_dict)
 
         env_response = env.step(action)
+        # record environment response (tool call result)
+        trace.append({
+            "type": "env_response",
+            "payload": {
+                "action": action.name,
+                "kwargs": action.kwargs if hasattr(action, "kwargs") else {},
+                "observation": env_response.observation,
+            },
+        })
         reward = env_response.reward
         info = {**info, **env_response.info.model_dump()}
 
@@ -130,6 +143,7 @@ User message:
         info=info,
         messages=[],  # incompatible, thus removed
         total_cost=total_cost,
+        trace=trace,
     )
 
 
@@ -181,6 +195,23 @@ class CalmGreenAgentExecutor(AgentExecutor):
         result_bool = metrics["success"] = res.reward == 1
         result_emoji = "✅" if result_bool else "❌"
 
+        # attach process-level scoring when trace available
+        proc = None
+        try:
+            if getattr(res, "trace", None):
+                proc = score_trace(res.trace)
+                try:
+                    llmres = llm_score_trace(res.trace, model="gpt-4o", provider="openai")
+                    proc["llm"] = llmres
+                except Exception:
+                    proc["llm"] = {"note": "llm scoring failed"}
+                # surface a few process metrics to top-level metrics for quick visibility
+                metrics.setdefault("process", {})
+                metrics["process"]["tool_call_success_rate"] = proc.get("tool_call_success_rate")
+                metrics["process"]["rounds"] = proc.get("rounds")
+        except Exception:
+            proc = None
+
         print("Green agent: Evaluation complete.")
         # Save evaluation summary to results/ for later inspection
         try:
@@ -193,6 +224,7 @@ class CalmGreenAgentExecutor(AgentExecutor):
                     "metrics": metrics,
                     "success": result_bool,
                     "result": res.model_dump() if hasattr(res, "model_dump") else None,
+                    "process_scores": proc,
                 }, sf, indent=2)
             print(f"Saved evaluation summary to {summary_path}")
         except Exception as e:
